@@ -3,15 +3,12 @@ package su.sendandsolve.data.db.room.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import su.sendandsolve.data.db.room.RoomAppDatabase
-import su.sendandsolve.data.db.room.dao.NoteDao
-import su.sendandsolve.data.db.room.dao.NoteTagDao
-import su.sendandsolve.data.db.room.dao.NoteTaskDao
 import su.sendandsolve.data.db.room.entity.NoteTag
 import su.sendandsolve.data.db.room.entity.NoteTask
 import su.sendandsolve.data.db.room.mapper.NoteMapper
 import su.sendandsolve.data.domain.DomainState
-import su.sendandsolve.data.domain.model.Note
 import su.sendandsolve.data.domain.Repository
+import su.sendandsolve.data.domain.model.Note
 import java.time.Instant
 import java.util.UUID
 

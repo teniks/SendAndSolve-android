@@ -1,13 +1,13 @@
 package su.sendandsolve.data.db.room.mapper
 
-import su.sendandsolve.data.db.room.entity.Task as Entity
 import su.sendandsolve.data.domain.Mapper
+import su.sendandsolve.data.db.room.entity.Task as Entity
 import su.sendandsolve.data.domain.model.Task as Domain
 
 object TaskMapper : Mapper<Domain, Entity> {
 
     override fun toDomain(entity: Entity): Domain {
-        var task = Domain(
+        val task = Domain(
             uuid = entity.uuid,
             title = entity.title,
             description = entity.description,
@@ -30,7 +30,7 @@ object TaskMapper : Mapper<Domain, Entity> {
     }
 
     override fun toEntity(domain: Domain): Entity {
-        var task = Entity(
+        val task = Entity(
             uuid = domain.uuid,
             title = domain.title,
             description = domain.description,

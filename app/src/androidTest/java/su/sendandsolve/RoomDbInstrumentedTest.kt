@@ -6,14 +6,30 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import su.sendandsolve.data.db.room.RoomAppDatabase
-import su.sendandsolve.data.db.room.repository.*
-import su.sendandsolve.data.domain.model.*
+import su.sendandsolve.data.db.room.repository.DeviceRepository
+import su.sendandsolve.data.db.room.repository.GroupRepository
+import su.sendandsolve.data.db.room.repository.NoteRepository
+import su.sendandsolve.data.db.room.repository.ResourceRepository
+import su.sendandsolve.data.db.room.repository.SessionRepository
+import su.sendandsolve.data.db.room.repository.TagRepository
+import su.sendandsolve.data.db.room.repository.TaskRepository
+import su.sendandsolve.data.db.room.repository.TeamRepository
+import su.sendandsolve.data.db.room.repository.UserRepository
+import su.sendandsolve.data.domain.model.Device
+import su.sendandsolve.data.domain.model.Group
+import su.sendandsolve.data.domain.model.Note
+import su.sendandsolve.data.domain.model.Resource
+import su.sendandsolve.data.domain.model.Session
+import su.sendandsolve.data.domain.model.Tag
+import su.sendandsolve.data.domain.model.Task
+import su.sendandsolve.data.domain.model.Team
+import su.sendandsolve.data.domain.model.User
 import java.time.Instant
 import java.util.UUID
 
@@ -28,6 +44,7 @@ class RoomDbInstrumentedTest {
     private lateinit var resourceRepository: ResourceRepository
     private lateinit var noteRepository: NoteRepository
     private lateinit var deviceRepository: DeviceRepository
+    private lateinit var groupRepository: GroupRepository
 
     @Before
     fun setup() {
@@ -43,6 +60,7 @@ class RoomDbInstrumentedTest {
         resourceRepository = ResourceRepository(db)
         noteRepository = NoteRepository(db)
         deviceRepository = DeviceRepository(db)
+        groupRepository = GroupRepository(db)
     }
 
     @After
@@ -342,14 +360,11 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadDevice(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
-        userRepository.insert(user)
+        val device: Device = Device(UUID.randomUUID(), "testName", Instant.now())
+        deviceRepository.insert(device)
 
-        val note: Note = Note(UUID.randomUUID(), "testTitle", "testToken", user.uuid, Instant.now())
-        noteRepository.insert(note)
-
-        val t = noteRepository.getById(note.uuid)
-        assertEquals(note.uuid, t?.uuid)
+        val t = deviceRepository.getById(device.uuid)
+        assertEquals(device.uuid, t?.uuid)
     }
 
     @Test
@@ -373,6 +388,48 @@ class RoomDbInstrumentedTest {
         deviceRepository.delete(device)
 
         val result = deviceRepository.getById(device.uuid)
+        assertNull(result)
+    }
+
+    @Test
+    fun createAndReadGroup(): Unit = runBlocking {
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        userRepository.insert(user)
+
+        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        groupRepository.insert(group)
+
+        val t = groupRepository.getById(group.uuid)
+        assertEquals(group.uuid, t?.uuid)
+    }
+
+    @Test
+    fun updateGroup(): Unit = runBlocking {
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        userRepository.insert(user)
+
+        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        groupRepository.insert(group)
+
+        val new = "newGroup"
+        val t = group.copy(name = new)
+        groupRepository.update(t)
+
+        val result = groupRepository.getById(group.uuid)
+        assertEquals(new, result?.name)
+    }
+
+    @Test
+    fun deleteGroup(): Unit = runBlocking {
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        userRepository.insert(user)
+
+        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        groupRepository.insert(group)
+
+        groupRepository.delete(group)
+
+        val result = deviceRepository.getById(group.uuid)
         assertNull(result)
     }
 }
