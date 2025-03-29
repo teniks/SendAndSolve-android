@@ -1,4 +1,4 @@
-package su.sendandsolve.util
+package su.sendandsolve.utils
 
 import org.json.JSONArray
 import org.json.JSONObject

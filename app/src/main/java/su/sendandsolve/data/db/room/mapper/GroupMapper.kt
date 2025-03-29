@@ -1,8 +1,8 @@
 package su.sendandsolve.data.db.room.mapper
 
 import su.sendandsolve.data.domain.Mapper
-import su.sendandsolve.util.toJSONObject
-import su.sendandsolve.util.toMap
+import su.sendandsolve.utils.toJSONObject
+import su.sendandsolve.utils.toMap
 import su.sendandsolve.data.db.room.entity.Group as Entity
 import su.sendandsolve.data.domain.model.Group as Domain
 

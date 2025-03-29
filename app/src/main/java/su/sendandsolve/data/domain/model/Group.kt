@@ -8,9 +8,9 @@ import java.util.UUID
 data class Group(
     override val uuid: UUID,
     val name: String,
+    val creatorId: UUID,
     val isAuto: Boolean = false,
     val criteria: Map<String, *>,
-    val creatorId: UUID,
     val tasks: MutableMap<Task, DomainState> = mutableMapOf(),
     override var isDeleted: Boolean = false,
     override var isSynced: Boolean = false,

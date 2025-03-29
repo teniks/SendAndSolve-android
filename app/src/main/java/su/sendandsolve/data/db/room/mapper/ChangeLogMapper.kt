@@ -3,8 +3,8 @@ package su.sendandsolve.data.db.room.mapper
 import su.sendandsolve.data.db.room.entity.ChangeLog as Entity
 import su.sendandsolve.data.domain.model.ChangeLog as Domain
 import su.sendandsolve.data.domain.Mapper
-import su.sendandsolve.util.toJSONObject
-import su.sendandsolve.util.toMap
+import su.sendandsolve.utils.toJSONObject
+import su.sendandsolve.utils.toMap
 
 object ChangeLogMapper : Mapper<Domain, Entity> {
     override fun toDomain(entity: Entity): Domain {

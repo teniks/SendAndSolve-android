@@ -1,6 +1,6 @@
 package su.sendandsolve.data.db.room.mapper
 
-import su.sendandsolve.util.*;
+import su.sendandsolve.utils.*
 import su.sendandsolve.data.db.room.entity.Resource as Entity
 import su.sendandsolve.data.domain.Mapper
 import su.sendandsolve.data.domain.model.Resource as Domain
