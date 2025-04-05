@@ -11,25 +11,25 @@ import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import su.sendandsolve.data.db.room.RoomAppDatabase
-import su.sendandsolve.data.db.room.repository.DeviceRepository
-import su.sendandsolve.data.db.room.repository.GroupRepository
-import su.sendandsolve.data.db.room.repository.NoteRepository
-import su.sendandsolve.data.db.room.repository.ResourceRepository
-import su.sendandsolve.data.db.room.repository.SessionRepository
-import su.sendandsolve.data.db.room.repository.TagRepository
-import su.sendandsolve.data.db.room.repository.TaskRepository
-import su.sendandsolve.data.db.room.repository.TeamRepository
-import su.sendandsolve.data.db.room.repository.UserRepository
-import su.sendandsolve.data.domain.model.Device
-import su.sendandsolve.data.domain.model.Group
-import su.sendandsolve.data.domain.model.Note
-import su.sendandsolve.data.domain.model.Resource
-import su.sendandsolve.data.domain.model.Session
-import su.sendandsolve.data.domain.model.Tag
-import su.sendandsolve.data.domain.model.Task
-import su.sendandsolve.data.domain.model.Team
-import su.sendandsolve.data.domain.model.User
+import su.sendandsolve.core.database.room.RoomAppDatabase
+import su.sendandsolve.core.database.room.repository.DeviceRepository
+import su.sendandsolve.core.database.room.repository.GroupRepository
+import su.sendandsolve.core.database.room.repository.NoteRepository
+import su.sendandsolve.core.database.room.repository.ResourceRepository
+import su.sendandsolve.core.database.room.repository.SessionRepository
+import su.sendandsolve.core.database.room.repository.TagRepository
+import su.sendandsolve.core.database.room.repository.TaskRepository
+import su.sendandsolve.core.database.room.repository.TeamRepository
+import su.sendandsolve.core.database.room.repository.UserRepository
+import su.sendandsolve.features.tasks.domain.model.Device
+import su.sendandsolve.features.tasks.domain.model.Group
+import su.sendandsolve.features.tasks.domain.model.Note
+import su.sendandsolve.features.tasks.domain.model.Resource
+import su.sendandsolve.features.tasks.domain.model.Session
+import su.sendandsolve.features.tasks.domain.model.Tag
+import su.sendandsolve.features.tasks.domain.model.Task
+import su.sendandsolve.features.tasks.domain.model.Team
+import su.sendandsolve.features.tasks.domain.model.User
 import java.time.Instant
 import java.util.UUID
 
@@ -149,7 +149,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), null, 0,  user.uuid, "personal", null, Instant.now())
+        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
         taskRepository.insert(task)
 
         val t = taskRepository.getById(task.uuid)
@@ -161,7 +161,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), null, 0,  user.uuid, "personal", null, Instant.now())
+        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
         taskRepository.insert(task)
 
         val new = "newTitle"
@@ -177,7 +177,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), null, 0,  user.uuid, "personal", null, Instant.now())
+        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
         taskRepository.insert(task)
 
         taskRepository.delete(task)
@@ -396,7 +396,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())
         groupRepository.insert(group)
 
         val t = groupRepository.getById(group.uuid)
@@ -408,7 +408,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())
         groupRepository.insert(group)
 
         val new = "newGroup"
@@ -424,7 +424,7 @@ class RoomDbInstrumentedTest {
         val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
         userRepository.insert(user)
 
-        val group: Group = Group(UUID.randomUUID(), "testGroup", isAuto = true, emptyMap<String, String>(), user.uuid)
+        val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())
         groupRepository.insert(group)
 
         groupRepository.delete(group)

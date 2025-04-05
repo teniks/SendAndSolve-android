@@ -8,12 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import su.sendandsolve.data.adapters.ButtonAdapter
-import su.sendandsolve.data.adapters.GroupAdapter
-import su.sendandsolve.data.domain.DomainState
-import su.sendandsolve.data.domain.model.Group
-import su.sendandsolve.data.domain.model.Task
-import su.sendandsolve.data.items.ButtonItem
+import su.sendandsolve.core.adapters.ButtonAdapter
+import su.sendandsolve.features.tasks.group.ui.GroupAdapter
+import su.sendandsolve.features.tasks.domain.DomainState
+import su.sendandsolve.features.tasks.domain.model.Group
+import su.sendandsolve.features.tasks.domain.model.Task
+import su.sendandsolve.core.items.ButtonItem
 import java.time.Instant
 import java.util.UUID
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        view.findViewById<RecyclerView>(R.id.buttonRecycleView).apply {
+        view.findViewById<RecyclerView>(R.id.button_recycleview).apply {
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = (ButtonAdapter { button -> button.action()}).apply {
                 submitList(emptyList())
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadTestData(view: View) {
         (view.findViewById<RecyclerView>(R.id.groupRecyclerView).adapter as GroupAdapter).submitList(createTestGroups())
-        (view.findViewById<RecyclerView>(R.id.buttonRecycleView).adapter as ButtonAdapter).submitList(createTestButtons())
+        (view.findViewById<RecyclerView>(R.id.button_recycleview).adapter as ButtonAdapter).submitList(createTestButtons())
     }
 
     private fun createTestGroups() = listOf(

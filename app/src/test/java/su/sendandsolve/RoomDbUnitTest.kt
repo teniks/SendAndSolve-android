@@ -11,9 +11,9 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
-import su.sendandsolve.data.db.room.RoomAppDatabase
-import su.sendandsolve.data.db.room.repository.UserRepository
-import su.sendandsolve.data.domain.model.User
+import su.sendandsolve.core.database.room.RoomAppDatabase
+import su.sendandsolve.core.database.room.repository.UserRepository
+import su.sendandsolve.features.tasks.domain.model.User
 import java.util.UUID
 
 @RunWith(AndroidJUnit4::class)
