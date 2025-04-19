@@ -1,12 +1,12 @@
-package su.sendandsolve.core.adapters
+package su.sendandsolve.features.tasks.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import su.sendandsolve.features.tasks.domain.model.Task
-import su.sendandsolve.databinding.ItemTaskBinding
 import su.sendandsolve.core.utils.DeadlineUtil
+import su.sendandsolve.databinding.ItemTaskBinding
+import su.sendandsolve.features.tasks.domain.model.Task
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 

@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/profile_image"
             app:shapeAppearanceOverlay="@style/CircleImageView"
             android:layout_width="58dp"
             android:layout_height="58dp"
@@ -31,27 +31,28 @@
     </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/groupRecyclerView"
+        android:id="@+id/group_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/item_task_group"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/toolbarBottom"
+        app:layout_constraintBottom_toTopOf="@id/toolbar_bottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
-        android:id="@+id/toolbarBottom"
+        android:id="@+id/toolbar_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="32dp">
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/buttonRecycleView"
+            android:id="@+id/button_recycleview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_button"
@@ -59,11 +60,11 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/actionBtn"/>
+            app:layout_constraintBottom_toTopOf="@id/action_btn"/>
 
 
         <Button
-            android:id="@+id/actionBtn"
+            android:id="@+id/action_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"

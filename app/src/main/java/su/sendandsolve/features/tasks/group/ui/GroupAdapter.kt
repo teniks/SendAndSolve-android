@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import su.sendandsolve.core.adapters.TaskAdapter
-import su.sendandsolve.features.tasks.domain.model.Group
 import su.sendandsolve.databinding.ItemTaskGroupBinding
+import su.sendandsolve.features.tasks.adapters.TaskAdapter
+import su.sendandsolve.features.tasks.domain.model.Group
 
 class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
 
