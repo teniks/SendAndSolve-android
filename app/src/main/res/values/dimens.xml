@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_standard">8dp</dimen>
+    <dimen name="margin_x2">16dp</dimen>
     <dimen name="text_size_title">18sp</dimen>
     <dimen name="text_size_main">16sp</dimen>
 </resources>
