@@ -28,15 +28,12 @@
             android:background="@drawable/ic_launcher_background"/>
     </Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/group_recyclerview"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_task_group"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <LinearLayout
         android:id="@+id/toolbar_bottom"

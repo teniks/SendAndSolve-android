@@ -3,6 +3,7 @@ package su.sendandsolve.features.tasks.group.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import su.sendandsolve.databinding.ItemTaskGroupBinding
 import su.sendandsolve.features.tasks.adapters.TaskAdapter
@@ -12,7 +13,26 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
 
     private val items = mutableListOf<Group>()
 
-    class GroupViewHolder(val binding: ItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root)
+    companion object {
+        // Общий пул для всех вложенных RecyclerView
+        private val sharedViewPool = RecyclerView.RecycledViewPool()
+    }
+
+    inner class GroupViewHolder(val binding: ItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root) {
+        val taskAdapter = TaskAdapter()
+
+        init {
+            binding.tasksRecycleview.apply {
+                // Настройка пула переиспользования ViewHolder. Предотвращает конфликты при одновременной прокрутке нескольких горизонтальных списков
+                setRecycledViewPool(sharedViewPool)
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                // Отключает взаимодействие прокрутки вложенного списка с родительским. Позволяет независимо скроллить горизонтальные списки задач
+                isNestedScrollingEnabled = false
+                adapter = taskAdapter
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val binding = ItemTaskGroupBinding.inflate(
@@ -28,16 +48,7 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
         val item = items[position]
         with(holder.binding){
             groupName.text = item.name
-            tasksRecycleView.apply {
-                // Настройка пула переиспользования ViewHolder.  Предотвращает конфликты при одновременной прокрутке нескольких горизонтальных списков
-                setRecycledViewPool(RecyclerView.RecycledViewPool())
-                // Отключает взаимодействие прокрутки вложенного списка с родительским. Позволяет независимо скроллить горизонтальные списки задач
-                isNestedScrollingEnabled = false
-
-                adapter = TaskAdapter().apply {
-                    submitList(item.tasks.keys.toList())
-                }
-            }
+            holder.taskAdapter.submitList(item.tasks.keys.toList())
         }
     }
 

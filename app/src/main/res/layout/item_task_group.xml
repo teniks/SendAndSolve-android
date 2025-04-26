@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/groupName"
+        android:id="@+id/group_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -21,7 +21,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tasksRecycleView"
+        android:id="@+id/tasks_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_task"
@@ -29,7 +29,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/groupName"
+        app:layout_constraintTop_toBottomOf="@id/group_name"
         android:layout_margin="@dimen/margin_standard"/>
 
 
