@@ -1,4 +1,4 @@
-package su.sendandsolve.core.items
+package su.sendandsolve.core.items.button
 
 data class ButtonItem(
     val id: String,

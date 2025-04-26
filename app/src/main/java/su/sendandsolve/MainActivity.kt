@@ -1,18 +1,13 @@
 package su.sendandsolve
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import su.sendandsolve.core.adapters.ButtonAdapter
-import su.sendandsolve.core.items.ButtonItem
+import su.sendandsolve.core.items.button.NavigationBarFragment
 import su.sendandsolve.features.tasks.group.ui.GroupListFragment
-import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,44 +21,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val fragment = GroupListFragment.newInstance()
+        val groupFragment = GroupListFragment.newInstance()
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, fragment)
+            replace(R.id.group_fragment_container, groupFragment)
             addToBackStack(null)
         }
 
-        setupRecycleViews(findViewById(R.id.main))
-        loadTestData(findViewById(R.id.main))
-    }
-
-    private fun setupRecycleViews(view: View){
-        view.findViewById<RecyclerView>(R.id.button_recycleview).apply {
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = (ButtonAdapter { button -> button.action()}).apply {
-                submitList(emptyList())
-            }
+        val navigationBarFragment: NavigationBarFragment = NavigationBarFragment.newInstance()
+        supportFragmentManager.commit {
+            replace(R.id.navigation_bar_fragment_container, navigationBarFragment)
+            addToBackStack(null)
         }
     }
-
-    private fun loadTestData(view: View) {
-        (view.findViewById<RecyclerView>(R.id.button_recycleview).adapter as ButtonAdapter).submitList(createTestButtons())
-    }
-
-    private fun createTestButtons() = listOf(
-        ButtonItem(
-            id = UUID.randomUUID().toString(),
-            text = "Пред.",
-            action = {  }
-        ),
-        ButtonItem(
-            id = UUID.randomUUID().toString(),
-            text = "След.",
-            action = {  }
-        ),
-        ButtonItem(
-            id = UUID.randomUUID().toString(),
-            text = "Фильтр",
-            action = {  }
-        )
-    )
 }

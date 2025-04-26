@@ -16,14 +16,14 @@ import java.util.UUID
 class GroupListViewModel(
     private val repository: Repository<Group>
 ) : ViewModel() {
-    private var _groups: MutableStateFlow<List<Group>> = MutableStateFlow(emptyList())
+    private val _groups: MutableStateFlow<List<Group>> = MutableStateFlow(emptyList())
     val groups: StateFlow<List<Group>> = _groups
 
     init {
         fetchTestData()
     }
 
-    fun fetchTestData(){
+    private fun fetchTestData() {
         _groups.value = createTestGroups()
     }
 

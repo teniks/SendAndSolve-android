@@ -49,7 +49,7 @@ class GroupListFragment : Fragment() {
         }
 
         viewModel.groups.onEach { groups ->
-            adapter = adapter.apply {
+            adapter.apply {
                 submitList(groups)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
