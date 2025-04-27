@@ -56,7 +56,9 @@ class GroupListViewModel(
                     progress = 0,
                     creatorId = UUID.randomUUID(),
                     scope = "Test scope $it",
-                    creationDate = Instant.now())  } as MutableMap<Task, DomainState>,
+                    creationDate = Instant.now(),
+                    endDate = Instant.now().plusSeconds(3600))  } as MutableMap<Task, DomainState>,
+
             creatorId = UUID.randomUUID(),
             criteria = mapOf("test" to "test")
         ),
