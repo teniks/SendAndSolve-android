@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.group.ui
+package su.sendandsolve.features.tasks.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import su.sendandsolve.databinding.TasksItemTaskGroupBinding
-import su.sendandsolve.features.tasks.adapters.TaskAdapter
 import su.sendandsolve.features.tasks.domain.model.Group
 
-class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
+class GroupAdapter : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
 
     private val items = mutableListOf<Group>()
 
@@ -18,8 +17,8 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
         private val sharedViewPool = RecyclerView.RecycledViewPool()
     }
 
-    inner class GroupViewHolder(val binding: TasksItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root) {
-        val taskAdapter = TaskAdapter()
+    inner class ViewHolder(private val binding: TasksItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val taskAdapter = TaskAdapter()
 
         init {
             binding.tasksRecycleview.apply {
@@ -32,27 +31,28 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
                 adapter = taskAdapter
             }
         }
+
+        fun bind(group: Group){
+            binding.groupName.text = group.name
+            taskAdapter.submitList(group.tasks.keys.toList())
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = TasksItemTaskGroupBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
 
-        return GroupViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
-        val item = items[position]
-        with(holder.binding){
-            groupName.text = item.name
-            holder.taskAdapter.submitList(item.tasks.keys.toList())
-        }
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(items[position])
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int =
+        items.size
 
     private class GroupDiffCallback(
         private val oldList: List<Group>,

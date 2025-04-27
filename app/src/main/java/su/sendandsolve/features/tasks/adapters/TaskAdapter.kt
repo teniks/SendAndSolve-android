@@ -8,31 +8,32 @@ import su.sendandsolve.core.utils.DeadlineUtil
 import su.sendandsolve.databinding.TasksItemTaskBinding
 import su.sendandsolve.features.tasks.domain.model.Task
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private val items = mutableListOf<Task>()
 
-    class TaskViewHolder(val binding: TasksItemTaskBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(private val binding: TasksItemTaskBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(task: Task){
+            binding.taskName.text = task.title
+            binding.taskDescription.text = task.description
+            binding.taskDeadline.text = DeadlineUtil.getString(task.startDate, task.endDate)
+        }
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = TasksItemTaskBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false)
 
-        return TaskViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val item = items[position]
-        with(holder.binding){
-            taskName.text = item.title
-            taskDescription.text = item.description
-            taskDeadline.text = DeadlineUtil.getString(item.startDate, item.endDate)
-        }
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(items[position])
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int =
+        items.size
 
     private class TaskDiffCallback(
         private val oldList: List<Task>,

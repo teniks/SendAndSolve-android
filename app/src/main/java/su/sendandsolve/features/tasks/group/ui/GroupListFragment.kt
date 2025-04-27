@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.onEach
 import su.sendandsolve.R
 import su.sendandsolve.core.database.room.RoomAppDatabase
 import su.sendandsolve.core.database.room.repository.GroupRepository
+import su.sendandsolve.features.tasks.adapters.GroupAdapter
 
 class GroupListFragment : Fragment() {
 
