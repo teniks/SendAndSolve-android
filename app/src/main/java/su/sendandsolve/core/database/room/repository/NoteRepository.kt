@@ -55,7 +55,16 @@ class NoteRepository(
 
                     DomainState.Delete -> {
                         db.noteTaskDao().setDeleted(this.uuid, task.key.uuid)
+                        db.noteTaskDao().setSynced(this.uuid, task.key.uuid, false)
                         task.key.isDeleted = true
+                        task.key.isSynced = false
+                        tasks[task.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.noteTaskDao().setDeleted(this.uuid, task.key.uuid, false)
+                        db.noteTaskDao().setSynced(this.uuid, task.key.uuid, false)
+                        task.key.isDeleted = false
                         task.key.isSynced = false
                         tasks[task.key] = DomainState.Read
                     }
@@ -86,7 +95,16 @@ class NoteRepository(
 
                     DomainState.Delete -> {
                         db.noteTagDao().setDeleted(this.uuid, tag.key.uuid)
+                        db.noteTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = true
+                        tag.key.isSynced = false
+                        tags[tag.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.noteTagDao().setDeleted(this.uuid, tag.key.uuid, false)
+                        db.noteTagDao().setSynced(this.uuid, tag.key.uuid, false)
+                        tag.key.isDeleted = false
                         tag.key.isSynced = false
                         tags[tag.key] = DomainState.Read
                     }

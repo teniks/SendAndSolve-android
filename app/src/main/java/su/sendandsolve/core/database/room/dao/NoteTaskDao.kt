@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import su.sendandsolve.core.database.room.entity.Note
 import su.sendandsolve.core.database.room.entity.NoteTask
@@ -27,9 +26,6 @@ interface NoteTaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(taskTag: NoteTask)
-
-    @Update
-    suspend fun update(taskTag: NoteTask)
 
     @Query("UPDATE note_tasks SET is_deleted = :isDeleted WHERE note_id = :noteId AND task_id = :taskId")
     suspend fun setDeleted(noteId: UUID, taskId: UUID, isDeleted: Boolean = true)

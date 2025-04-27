@@ -54,7 +54,16 @@ class GroupRepository(
 
                     DomainState.Delete -> {
                         db.taskGroupDao().setDeleted(groupId = this.uuid, taskId = task.key.uuid)
+                        db.taskGroupDao().setSynced(groupId = this.uuid, taskId = task.key.uuid, false)
                         task.key.isDeleted = true
+                        task.key.isSynced = false
+                        tasks[task.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskGroupDao().setDeleted(groupId = this.uuid, taskId = task.key.uuid, false)
+                        db.taskGroupDao().setSynced(groupId = this.uuid, taskId = task.key.uuid, false)
+                        task.key.isDeleted = false
                         task.key.isSynced = false
                         tasks[task.key] = DomainState.Read
                     }

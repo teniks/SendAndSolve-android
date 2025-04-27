@@ -55,8 +55,17 @@ class TeamRepository(
 
                     DomainState.Delete -> {
                         db.teamMemberDao().setDeleted(member.key.uuid, this.uuid)
+                        db.teamMemberDao().setSynced(member.key.uuid, this.uuid, false)
                         member.key.isDeleted = true
                         member.key.isSynced = false
+                        members[member.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.teamMemberDao().setDeleted(member.key.uuid, this.uuid, false)
+                        db.teamMemberDao().setSynced(member.key.uuid, this.uuid, false)
+                        member.key.isDeleted = false
+                        member.key.isSynced = true
                         members[member.key] = DomainState.Read
                     }
 

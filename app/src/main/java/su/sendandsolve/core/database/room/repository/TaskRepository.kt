@@ -56,9 +56,17 @@ class TaskRepository(
 
                     DomainState.Delete -> {
                         db.taskHierarchyDao().setDeleted(this.uuid, note.key.uuid)
+                        db.taskHierarchyDao().setSynced(this.uuid, note.key.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
 
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskHierarchyDao().setDeleted(this.uuid, note.key.uuid)
+                        db.taskHierarchyDao().setSynced(this.uuid, note.key.uuid, false)
+                        note.key.isDeleted = true
+                        note.key.isSynced = false
                     }
 
                     DomainState.Read -> {}
@@ -83,9 +91,17 @@ class TaskRepository(
 
                     DomainState.Delete -> {
                         db.taskHierarchyDao().setDeleted(note.key.uuid, this.uuid)
+                        db.taskHierarchyDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
 
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskHierarchyDao().setDeleted(note.key.uuid, this.uuid, false)
+                        db.taskHierarchyDao().setSynced(note.key.uuid, this.uuid, false)
+                        note.key.isDeleted = true
+                        note.key.isSynced = false
                     }
 
                     DomainState.Read -> {}
@@ -113,9 +129,17 @@ class TaskRepository(
 
                     DomainState.Delete -> {
                         db.taskTagDao().setDeleted(this.uuid, tag.key.uuid)
+                        db.taskTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
                         tags[tag.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskTagDao().setDeleted(this.uuid, tag.key.uuid, false)
+                        db.taskTagDao().setSynced(this.uuid, tag.key.uuid, false)
+                        tag.key.isDeleted = true
+                        tag.key.isSynced = false
                     }
 
                     DomainState.Read -> {}
@@ -144,9 +168,17 @@ class TaskRepository(
 
                     DomainState.Delete -> {
                         db.taskResourceDao().setDeleted(resource.key.uuid, this.uuid)
+                        db.taskResourceDao().setSynced(resource.key.uuid, this.uuid, false)
                         resource.key.isDeleted = true
                         resource.key.isSynced = false
                         resources[resource.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskResourceDao().setDeleted(resource.key.uuid, this.uuid, false)
+                        db.taskResourceDao().setSynced(resource.key.uuid, this.uuid, false)
+                        resource.key.isDeleted = true
+                        resource.key.isSynced = false
                     }
 
                     DomainState.Read -> {}
@@ -175,9 +207,17 @@ class TaskRepository(
 
                     DomainState.Delete -> {
                         db.noteTaskDao().setDeleted(note.key.uuid, this.uuid)
+                        db.noteTaskDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
                         notes[note.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.noteTaskDao().setDeleted(note.key.uuid, this.uuid, false)
+                        db.noteTaskDao().setSynced(note.key.uuid, this.uuid, false)
+                        note.key.isDeleted = true
+                        note.key.isSynced = false
                     }
 
                     DomainState.Read -> {}

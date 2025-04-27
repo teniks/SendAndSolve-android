@@ -56,8 +56,17 @@ class UserRepository(
 
                     DomainState.Delete -> {
                         db.taskAssignmentDao().setDelete(task.key.uuid, this.uuid)
+                        db.taskAssignmentDao().setSynced(task.key.uuid, this.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
+                        tasks[task.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskAssignmentDao().setDelete(task.key.uuid, this.uuid, false)
+                        db.taskAssignmentDao().setSynced(task.key.uuid, this.uuid, false)
+                        task.key.isDeleted = false
+                        task.key.isSynced = true
                         tasks[task.key] = DomainState.Read
                     }
 
@@ -88,8 +97,17 @@ class UserRepository(
 
                     DomainState.Delete -> {
                         db.teamMemberDao().setDeleted(this.uuid, team.key.uuid)
+                        db.teamMemberDao().setSynced(this.uuid, team.key.uuid, false)
                         team.key.isDeleted = true
                         team.key.isSynced = false
+                        teams[team.key] = DomainState.Read
+                    }
+
+                    DomainState.Recover -> {
+                        db.teamMemberDao().setDeleted(this.uuid, team.key.uuid, false)
+                        db.teamMemberDao().setSynced(this.uuid, team.key.uuid, false)
+                        team.key.isDeleted = false
+                        team.key.isSynced = true
                         teams[team.key] = DomainState.Read
                     }
 

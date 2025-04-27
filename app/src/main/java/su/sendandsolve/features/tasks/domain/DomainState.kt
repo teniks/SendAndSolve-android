@@ -6,5 +6,6 @@ package su.sendandsolve.features.tasks.domain
 enum class DomainState {
     Read,
     Insert,
-    Delete
+    Delete,
+    Recover
 }

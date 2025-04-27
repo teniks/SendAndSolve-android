@@ -54,10 +54,19 @@ class ResourceRepository(
 
                     DomainState.Delete -> {
                         db.taskResourceDao().setDeleted(task.key.uuid, domain.uuid)
+                        db.taskResourceDao().setSynced(task.key.uuid, domain.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
                         tasks[task.key] = DomainState.Read
                     }
+
+                    DomainState.Recover -> {
+                        db.taskResourceDao().setDeleted(task.key.uuid, domain.uuid, false)
+                        db.taskResourceDao().setSynced(task.key.uuid, domain.uuid, false)
+                        task.key.isDeleted = true
+                        task.key.isSynced = false
+                    }
+
                     DomainState.Read -> {  }
                 }
             }
