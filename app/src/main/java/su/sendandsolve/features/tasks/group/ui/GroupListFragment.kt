@@ -37,7 +37,7 @@ class GroupListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        return inflater.inflate(R.layout.fragment_group_list, container, false)
+        return inflater.inflate(R.layout.tasks_fragment_group_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

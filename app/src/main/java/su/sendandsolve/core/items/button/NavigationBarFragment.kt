@@ -28,7 +28,7 @@ class NavigationBarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        return inflater.inflate(R.layout.fragment_navigation_bar, container, false)
+        return inflater.inflate(R.layout.core_fragment_navigation_bar, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import su.sendandsolve.databinding.ItemTaskGroupBinding
+import su.sendandsolve.databinding.TasksItemTaskGroupBinding
 import su.sendandsolve.features.tasks.adapters.TaskAdapter
 import su.sendandsolve.features.tasks.domain.model.Group
 
@@ -18,7 +18,7 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
         private val sharedViewPool = RecyclerView.RecycledViewPool()
     }
 
-    inner class GroupViewHolder(val binding: ItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class GroupViewHolder(val binding: TasksItemTaskGroupBinding) : RecyclerView.ViewHolder(binding.root) {
         val taskAdapter = TaskAdapter()
 
         init {
@@ -35,7 +35,7 @@ class GroupAdapter : RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
-        val binding = ItemTaskGroupBinding.inflate(
+        val binding = TasksItemTaskGroupBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

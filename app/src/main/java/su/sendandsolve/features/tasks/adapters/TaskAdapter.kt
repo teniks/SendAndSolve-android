@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import su.sendandsolve.core.utils.DeadlineUtil
-import su.sendandsolve.databinding.ItemTaskBinding
+import su.sendandsolve.databinding.TasksItemTaskBinding
 import su.sendandsolve.features.tasks.domain.model.Task
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val items = mutableListOf<Task>()
 
-    class TaskViewHolder(val binding: ItemTaskBinding): RecyclerView.ViewHolder(binding.root)
+    class TaskViewHolder(val binding: TasksItemTaskBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val binding = ItemTaskBinding.inflate(
+        val binding = TasksItemTaskBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false)

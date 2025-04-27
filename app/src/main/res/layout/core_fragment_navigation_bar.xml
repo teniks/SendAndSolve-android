@@ -10,7 +10,7 @@
         android:id="@+id/button_recycleview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_button"
+        tools:listitem="@layout/core_item_button"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"

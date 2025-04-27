@@ -10,7 +10,7 @@
         android:id="@+id/group_list_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_task_group"
+        tools:listitem="@layout/tasks_item_task_group"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
