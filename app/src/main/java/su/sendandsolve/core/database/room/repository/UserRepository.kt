@@ -11,8 +11,9 @@ import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.User
 import java.time.Instant
 import java.util.UUID
+import javax.inject.Inject
 
-class UserRepository(
+class UserRepository @Inject constructor(
     private val db: RoomAppDatabase
 ) : Repository<User> {
 

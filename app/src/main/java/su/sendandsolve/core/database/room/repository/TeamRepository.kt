@@ -10,8 +10,9 @@ import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Team
 import java.time.Instant
 import java.util.UUID
+import javax.inject.Inject
 
-class TeamRepository(
+class TeamRepository @Inject constructor(
     private val db: RoomAppDatabase
 ) : Repository<Team> {
     override suspend fun getById(id: UUID): Team? {

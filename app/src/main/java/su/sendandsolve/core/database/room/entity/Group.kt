@@ -17,7 +17,7 @@ import java.util.UUID
         childColumns = ["creator_id"],
         onDelete = ForeignKey.CASCADE
     )],
-    indices = [Index("uuid"), Index("is_synced")]
+    indices = [Index("uuid"), Index("is_synced"), Index("creator_id")]
 )
 data class Group(
     @PrimaryKey

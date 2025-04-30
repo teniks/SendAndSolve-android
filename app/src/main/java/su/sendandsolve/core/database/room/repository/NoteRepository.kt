@@ -11,8 +11,9 @@ import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Note
 import java.time.Instant
 import java.util.UUID
+import javax.inject.Inject
 
-class NoteRepository(
+class NoteRepository @Inject constructor(
     private val db: RoomAppDatabase
 ) : Repository<Note> {
     override suspend fun getById(id: UUID): Note? {

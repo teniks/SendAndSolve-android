@@ -9,29 +9,26 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import su.sendandsolve.R
-import su.sendandsolve.core.database.room.RoomAppDatabase
-import su.sendandsolve.core.database.room.repository.GroupRepository
 import su.sendandsolve.features.tasks.adapters.GroupAdapter
 
+@AndroidEntryPoint
 class GroupListFragment : Fragment() {
 
     companion object {
         fun newInstance() = GroupListFragment()
     }
 
-    private val viewModel: GroupListViewModel by viewModels {
-        GroupListViewModelFactory(repository)
-    }
+    private val viewModel: GroupListViewModel by viewModels()
+
     private lateinit var adapter: GroupAdapter
-    private lateinit var repository: GroupRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = GroupAdapter()
-        repository = GroupRepository(RoomAppDatabase.getAppDataBase(requireContext()))
     }
 
     override fun onCreateView(

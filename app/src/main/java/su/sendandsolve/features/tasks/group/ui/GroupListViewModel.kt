@@ -2,6 +2,7 @@ package su.sendandsolve.features.tasks.group.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -12,8 +13,10 @@ import su.sendandsolve.features.tasks.domain.model.Group
 import su.sendandsolve.features.tasks.domain.model.Task
 import java.time.Instant
 import java.util.UUID
+import javax.inject.Inject
 
-class GroupListViewModel(
+@HiltViewModel
+class GroupListViewModel @Inject constructor(
     private val repository: Repository<Group>
 ) : ViewModel() {
     private val _groups: MutableStateFlow<List<Group>> = MutableStateFlow(emptyList())

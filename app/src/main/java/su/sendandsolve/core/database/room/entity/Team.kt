@@ -17,7 +17,7 @@ import java.util.UUID
             childColumns = ["creator_id"]
         )
     ],
-    indices = [Index("uuid"), Index("is_synced")]
+    indices = [Index("uuid"), Index("is_synced"), Index("creator_id")]
 )
 data class Team(
     @PrimaryKey

@@ -23,7 +23,7 @@ import java.util.UUID
             childColumns = ["device_id"]
         )
     ],
-    indices = [Index("uuid"), Index("is_synced"), Index("user_id"), Index("timestamp")]
+    indices = [Index("uuid"), Index("is_synced"), Index("user_id"), Index("timestamp"), Index("device_id")]
 )
 data class ChangeLog(
     @PrimaryKey

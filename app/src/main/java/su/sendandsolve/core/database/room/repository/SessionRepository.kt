@@ -7,8 +7,9 @@ import su.sendandsolve.core.database.room.mapper.SessionMapper
 import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Session
 import java.util.UUID
+import javax.inject.Inject
 
-class SessionRepository(
+class SessionRepository @Inject constructor(
     private val db: RoomAppDatabase
 ) : Repository<Session> {
     override suspend fun getById(id: UUID): Session? {

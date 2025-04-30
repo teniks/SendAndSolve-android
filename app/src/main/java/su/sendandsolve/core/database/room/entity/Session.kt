@@ -22,7 +22,7 @@ import java.util.UUID
             childColumns = ["device_id"]
         )
     ],
-    indices = [Index("uuid"), Index("is_synced")]
+    indices = [Index("uuid"), Index("is_synced"), Index("device_id"), Index("user_id")]
 )
 data class Session(
     @PrimaryKey

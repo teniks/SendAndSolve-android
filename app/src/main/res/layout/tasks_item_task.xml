@@ -15,7 +15,7 @@
     android:backgroundTint="@color/additional_1">
 
     <TextView
-        android:id="@+id/taskName"
+        android:id="@+id/task_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_title"
@@ -27,11 +27,11 @@
         tools:text="Название задачи"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/taskDescription"
+        app:layout_constraintBottom_toTopOf="@id/task_description"
         android:layout_marginTop="2dp"/>
 
     <TextView
-        android:id="@+id/taskDescription"
+        android:id="@+id/task_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_main"
@@ -41,13 +41,13 @@
         android:maxWidth="360dp"
         tools:text="Описание задачи Описание задачи Описание задачи Описание задачи Описание задачи Описание задачи Описание задачи Описание задачи Описание задачи"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/taskName"
-        app:layout_constraintBottom_toTopOf="@id/taskDeadline"
+        app:layout_constraintTop_toBottomOf="@id/task_name"
+        app:layout_constraintBottom_toTopOf="@id/task_deadline"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"/>
 
     <TextView
-        android:id="@+id/taskDeadline"
+        android:id="@+id/task_deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"

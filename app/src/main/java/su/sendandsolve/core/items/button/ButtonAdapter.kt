@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import su.sendandsolve.databinding.CoreItemButtonBinding
 
-class ButtonAdapter : RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>() {
+class ButtonAdapter : RecyclerView.Adapter<ButtonAdapter.ViewHolder>() {
 
     private val items = mutableListOf<ButtonItem>()
 
-    inner class ButtonViewHolder(binding: CoreItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: CoreItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
         private val button: Button = binding.navigationBtn
 
         fun bind(item: ButtonItem) {
@@ -20,17 +20,17 @@ class ButtonAdapter : RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = CoreItemButtonBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
 
-        return ButtonViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ButtonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

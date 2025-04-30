@@ -11,8 +11,9 @@ import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Tag
 import java.time.Instant
 import java.util.UUID
+import javax.inject.Inject
 
-class TagRepository(
+class TagRepository @Inject constructor(
     private val db: RoomAppDatabase
 ) : Repository<Tag> {
     override suspend fun getById(id: UUID): Tag? {

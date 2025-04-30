@@ -38,7 +38,7 @@ data class Task(
     val priority: Int,
 
     @ColumnInfo(name = "start_date")
-    val startDate: Instant,
+    val startDate: Instant? = null,
 
     @ColumnInfo(name = "end_date")
     val endDate: Instant? = null,
