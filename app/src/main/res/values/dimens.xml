@@ -8,5 +8,5 @@
     <dimen name="text_size_title">20sp</dimen>
     <dimen name="text_size_main">16sp</dimen>
 
-    <dimen name="tags_dialog_height">150dp</dimen>
+    <dimen name="tags_dialog_height">300dp</dimen>
 </resources>

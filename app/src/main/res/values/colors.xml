@@ -20,4 +20,7 @@
     <!-- Предупреждения, не критичные уведомления -->
     <color name="yellow">#FFD740</color>
     <color name="yellow_dark">#FFC400</color>
+
+    <color name="selected_tag">#4CAF50</color>
+    <color name="unselected_tag">#1AFFFFFF</color>
 </resources>
