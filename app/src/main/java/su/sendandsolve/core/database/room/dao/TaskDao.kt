@@ -3,7 +3,6 @@ package su.sendandsolve.core.database.room.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import su.sendandsolve.core.database.room.entity.Task
@@ -12,19 +11,9 @@ import java.util.UUID
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM tasks WHERE is_deleted = :isDeleted AND scope = :scope and creator_id = :creatorId")
-    fun getPersonalTasks(creatorId: UUID, isDeleted: Boolean = false, scope: String = "personal"): Flow<List<Task>>
 
-    @Transaction
-    @Query("""
-        SELECT * FROM tasks
-        WHERE scope = :scope AND team_id = :teamId
-        AND (creator_id = :userId OR :userId IN
-        (SELECT user_id FROM team_members 
-        WHERE team_id = :teamId AND team_role IN (:roles)
-        AND is_deleted = :isDeleted) AND is_deleted = :isDeleted)
-    """)
-    fun getTeamTasks(teamId: UUID, userId: UUID, isDeleted: Boolean = false, scope: String = "team", roles: List<String> = listOf("creator", "admin")): Flow<List<Task>>
+    @Query("SELECT * FROM tasks WHERE is_deleted = :isDeleted ORDER BY date_creation DESC LIMIT :limit OFFSET :offset")
+    suspend fun getTasks(limit: Int, offset: Int, isDeleted: Boolean = false): Flow<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE uuid = :taskId")
     suspend fun getById(taskId: UUID): Task?
@@ -46,9 +35,6 @@ interface TaskDao {
 
     @Query("SELECT * FROM tasks WHERE status = :status AND is_deleted = :isDeleted")
     fun getByStatus(status: String, isDeleted: Boolean = false): Flow<List<Task>>
-
-    @Query("SELECT * FROM tasks WHERE scope = :scope AND is_deleted = :isDeleted")
-    fun getByScope(scope: String, isDeleted: Boolean = false): Flow<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE team_id = :teamId AND is_deleted = :isDeleted")
     fun getByTeam(teamId: UUID, isDeleted: Boolean = false): Flow<List<Task>>

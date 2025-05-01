@@ -49,9 +49,6 @@ data class Task(
     @ColumnInfo(name = "creator_id")
     val creatorId: UUID,
 
-    @ColumnInfo(name = "scope")
-    val scope: String,
-
     @ColumnInfo(name = "team_id")
     val teamId: UUID? = null,
 

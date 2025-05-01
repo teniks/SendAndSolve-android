@@ -13,7 +13,6 @@ data class Task(
     val status: String = "Статус",
     val priority: Int = 0,
     val progress: Int = 0,
-    val scope: String = "personal",
     val creationDate: Instant = Instant.now(),
     val teamId: UUID? = null,
     val startDate: Instant? = null,
