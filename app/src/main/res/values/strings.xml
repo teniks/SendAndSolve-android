@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Send And Solve</string>
+
+    <string name="name_task_hint"> <font size="24">Title</font> </string>
+    <string name="description_task_hint"> <font size="20">Description</font> </string>
+    <string name="status_task_hint">Status</string>
+    <string name="priority_task_hint">Priority</string>
+    <string name="scope_task_hint">Category</string>
+    <string name="start_date_hint">Start date</string>
+    <string name="end_date_hint">End date</string>
 </resources>

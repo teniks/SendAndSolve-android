@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import su.sendandsolve.core.utils.CurrentUser
 import su.sendandsolve.features.tasks.domain.DomainState
 import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Group
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GroupListViewModel @Inject constructor(
-    private val repository: Repository<Group>
+    private val repository: Repository<Group>,
+    private val currentUser: CurrentUser
 ) : ViewModel() {
     private val _groups: MutableStateFlow<List<Group>> = MutableStateFlow(emptyList())
     val groups: StateFlow<List<Group>> = _groups
@@ -58,7 +60,6 @@ class GroupListViewModel @Inject constructor(
                     startDate = Instant.now(),
                     progress = 0,
                     creatorId = UUID.randomUUID(),
-                    scope = "Test scope $it",
                     creationDate = Instant.now(),
                     endDate = Instant.now().plusSeconds(3600))  } as MutableMap<Task, DomainState>,
 
@@ -80,7 +81,6 @@ class GroupListViewModel @Inject constructor(
                     startDate = Instant.now(),
                     progress = 0,
                     creatorId = UUID.randomUUID(),
-                    scope = "Test scope $it",
                     creationDate = Instant.now())  } as MutableMap<Task, DomainState>,
             creatorId = UUID.randomUUID(),
             criteria = mapOf("test" to "test")

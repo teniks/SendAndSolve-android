@@ -2,6 +2,11 @@
 <resources>
     <dimen name="margin_standard">8dp</dimen>
     <dimen name="margin_x2">16dp</dimen>
-    <dimen name="text_size_title">18sp</dimen>
+
+    <dimen name="top_toolbar_height">74dp</dimen>
+
+    <dimen name="text_size_title">20sp</dimen>
     <dimen name="text_size_main">16sp</dimen>
+
+    <dimen name="tags_dialog_height">150dp</dimen>
 </resources>

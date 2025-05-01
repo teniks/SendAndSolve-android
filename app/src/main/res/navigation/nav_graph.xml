@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main_fragment">
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="su.sendandsolve.core.items.MainFragment"
+        android:label="Main">
+
+        <action
+            android:id="@+id/action_main_to_detail"
+            app:destination="@id/detail_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="su.sendandsolve.features.tasks.detail.ui.DetailTaskFragment"
+        android:label="Task Details"/>
+
+</navigation>

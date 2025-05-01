@@ -13,7 +13,7 @@ import java.util.UUID
 interface TaskDao {
 
     @Query("SELECT * FROM tasks WHERE is_deleted = :isDeleted ORDER BY date_creation DESC LIMIT :limit OFFSET :offset")
-    suspend fun getTasks(limit: Int, offset: Int, isDeleted: Boolean = false): Flow<List<Task>>
+    fun getTasks(limit: Int, offset: Int, isDeleted: Boolean = false): Flow<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE uuid = :taskId")
     suspend fun getById(taskId: UUID): Task?

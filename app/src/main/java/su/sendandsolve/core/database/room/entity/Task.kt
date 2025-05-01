@@ -18,7 +18,7 @@ import java.util.UUID
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index("uuid"), Index("is_synced"), Index("creator_id"), Index("status"), Index("priority"), Index("start_date"), Index("end_date"), Index("scope")]
+    indices = [Index("uuid"), Index("is_synced"), Index("creator_id"), Index("status"), Index("priority"), Index("start_date"), Index("end_date")]
 )
 data class Task(
     @PrimaryKey
@@ -43,11 +43,11 @@ data class Task(
     @ColumnInfo(name = "end_date")
     val endDate: Instant? = null,
 
-    @ColumnInfo(name = "progress")
-    val progress: Int,
-
     @ColumnInfo(name = "creator_id")
     val creatorId: UUID,
+
+    @ColumnInfo(name = "progress")
+    val progress: Int = 0,
 
     @ColumnInfo(name = "team_id")
     val teamId: UUID? = null,

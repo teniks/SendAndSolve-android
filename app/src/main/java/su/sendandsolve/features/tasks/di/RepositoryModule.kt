@@ -1,10 +1,9 @@
 package su.sendandsolve.features.tasks.di
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import su.sendandsolve.core.database.room.RoomAppDatabase
 import su.sendandsolve.core.database.room.repository.DeviceRepository
 import su.sendandsolve.core.database.room.repository.GroupRepository
 import su.sendandsolve.core.database.room.repository.NoteRepository
@@ -27,50 +26,32 @@ import su.sendandsolve.features.tasks.domain.model.User
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
-    fun provideUserRepository(db: RoomAppDatabase): Repository<User>{
-        return UserRepository(db)
-    }
+    @Binds
+    abstract fun bindUserRepository(repository: UserRepository): Repository<User>
 
-    @Provides
-    fun provideTeamRepository(db: RoomAppDatabase): Repository<Team>{
-        return TeamRepository(db)
-    }
+    @Binds
+    abstract fun bindTeamRepository(repository: TeamRepository): Repository<Team>
 
-    @Provides
-    fun provideTaskRepository(db: RoomAppDatabase): Repository<Task>{
-        return TaskRepository(db)
-    }
+    @Binds
+    abstract fun bindTaskRepository(repository: TaskRepository): Repository<Task>
 
-    @Provides
-    fun provideTagRepository(db: RoomAppDatabase): Repository<Tag>{
-        return TagRepository(db)
-    }
+    @Binds
+    abstract fun bindTagRepository(repository: TagRepository): Repository<Tag>
 
-    @Provides
-    fun provideSessionRepository(db: RoomAppDatabase): Repository<Session>{
-        return SessionRepository(db)
-    }
+    @Binds
+    abstract fun bindSessionRepository(repository: SessionRepository): Repository<Session>
 
-    @Provides
-    fun provideResourceRepository(db: RoomAppDatabase): Repository<Resource>{
-        return ResourceRepository(db)
-    }
+    @Binds
+    abstract fun bindResourceRepository(repository: ResourceRepository): Repository<Resource>
 
-    @Provides
-    fun provideNoteRepository(db: RoomAppDatabase): Repository<Note>{
-        return NoteRepository(db)
-    }
+    @Binds
+    abstract fun bindNoteRepository(repository: NoteRepository): Repository<Note>
 
-    @Provides
-    fun provideGroupRepository(db: RoomAppDatabase): Repository<Group>{
-        return GroupRepository(db)
-    }
+    @Binds
+    abstract fun bindGroupRepository(repository: GroupRepository): Repository<Group>
 
-    @Provides
-    fun provideDeviceRepository(db: RoomAppDatabase): Repository<Device>{
-        return DeviceRepository(db)
-    }
+    @Binds
+    abstract fun bindDeviceRepository(repository: DeviceRepository): Repository<Device>
 }
