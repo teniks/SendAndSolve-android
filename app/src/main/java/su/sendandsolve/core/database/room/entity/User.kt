@@ -24,6 +24,9 @@ data class User(
     @ColumnInfo(name = "password_hash")
     val passwordHash: String,
 
+    @ColumnInfo(name = "salt")
+    val salt: String,
+
     @ColumnInfo(name = "nickname")
     val nickname: String,
 

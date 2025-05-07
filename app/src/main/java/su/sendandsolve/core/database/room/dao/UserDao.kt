@@ -17,6 +17,12 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE uuid = :userId AND is_deleted = :isDeleted")
     suspend fun getById(userId: UUID, isDeleted: Boolean = false): User?
 
+    @Query("SELECT * FROM users WHERE login = :login AND is_deleted = :isDeleted")
+    suspend fun getByLogin(login: String, isDeleted: Boolean = false): User?
+
+    @Query("SELECT COUNT(*) FROM users WHERE login = :login")
+    suspend fun countByLogin(login: String): Int
+
     @Query("SELECT * FROM Users WHERE is_deleted = :isDeleted")
     fun getByIsDeleted(isDeleted: Boolean = false): Flow<List<User>>
 

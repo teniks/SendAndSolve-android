@@ -9,6 +9,7 @@ data class User (
     override val uuid: UUID,
     var login: String,
     val passwordHash: String,
+    val salt: String,
     val nickname: String,
     var teams: MutableMap<Team, DomainState> = mutableMapOf<Team, DomainState>(),
     var roles: MutableMap<Team, String> = mutableMapOf<Team, String>(),

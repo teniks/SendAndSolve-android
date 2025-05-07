@@ -6,10 +6,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import su.sendandsolve.core.database.room.RoomAppDatabase
 import su.sendandsolve.core.database.room.repository.UserRepository
@@ -37,7 +38,7 @@ class RoomDbUnitTest {
 
     @Test
     fun createAndReadUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", nickname = "testNick")
         userRepository.insert(user)
         val tUser = db.userDao().getById(user.uuid)
         //assertSame(tUser, user)
@@ -47,7 +48,7 @@ class RoomDbUnitTest {
 
     @Test
     fun updateUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", nickname = "testNick")
         userRepository.insert(user)
 
         val newLogin = "newLogin"
@@ -61,7 +62,7 @@ class RoomDbUnitTest {
 
     @Test
     fun deleteUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", nickname = "testNick")
         userRepository.insert(user)
 
         userRepository.delete(user)

@@ -1,7 +1,7 @@
 package su.sendandsolve.core.database.room.mapper
 
-import su.sendandsolve.core.database.room.entity.User as Entity
 import su.sendandsolve.features.tasks.domain.Mapper
+import su.sendandsolve.core.database.room.entity.User as Entity
 import su.sendandsolve.features.tasks.domain.model.User as Domain
 
 object UserMapper : Mapper<Domain, Entity> {
@@ -11,6 +11,7 @@ object UserMapper : Mapper<Domain, Entity> {
             nickname = entity.nickname,
             login = entity.login,
             passwordHash = entity.passwordHash,
+            salt = entity.salt,
             isDeleted = entity.isDeleted,
             isSynced = entity.isSynced,
             dataVersion = entity.dataVersion,
@@ -24,6 +25,7 @@ object UserMapper : Mapper<Domain, Entity> {
             uuid = domain.uuid,
             login = domain.login,
             passwordHash = domain.passwordHash,
+            salt = domain.salt,
             nickname = domain.nickname,
             isDeleted = domain.isDeleted,
             isSynced = domain.isSynced,

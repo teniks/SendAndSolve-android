@@ -70,7 +70,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val tUser = db.userDao().getById(user.uuid)
@@ -79,7 +79,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val new = "newLogin"
@@ -92,7 +92,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteUser(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         userRepository.delete(user)
@@ -103,7 +103,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadTeam(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val team: Team = Team(UUID.randomUUID(), "testTeam", user.uuid, lastModified = Instant.now())
@@ -115,7 +115,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateTeam(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val team: Team = Team(UUID.randomUUID(), "testTeam", user.uuid, lastModified = Instant.now())
@@ -131,7 +131,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteTeam(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val team: Team = Team(UUID.randomUUID(), "testTeam", user.uuid, lastModified = Instant.now())
@@ -146,10 +146,10 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadTask(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
+        val task: Task = Task(UUID.randomUUID(), title = "testTask", description = "testDescription", status = "testStatus", priority = 10, startDate = Instant.now(), progress =  0, creatorId = user.uuid, creationDate = Instant.now())
         taskRepository.insert(task)
 
         val t = taskRepository.getById(task.uuid)
@@ -158,10 +158,10 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateTask(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
+        val task: Task = Task(UUID.randomUUID(), title = "testTask", description = "testDescription", status = "testStatus", priority = 10, startDate = Instant.now(), progress =  0, creatorId = user.uuid, creationDate = Instant.now())
         taskRepository.insert(task)
 
         val new = "newTitle"
@@ -174,10 +174,10 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteTask(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
-        val task: Task = Task(UUID.randomUUID(), "testTask", "testDescription", "testStatus", 10, Instant.now(), 0,  user.uuid, "personal", Instant.now())
+        val task: Task = Task(UUID.randomUUID(), title = "testTask", description = "testDescription", status = "testStatus", priority = 10, startDate = Instant.now(), progress =  0, creatorId = user.uuid, creationDate = Instant.now())
         taskRepository.insert(task)
 
         taskRepository.delete(task)
@@ -222,7 +222,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadSession(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val device: Device = Device(UUID.randomUUID(), "testName", Instant.now())
@@ -237,7 +237,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateSession(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val device: Device = Device(UUID.randomUUID(), "testName", Instant.now())
@@ -256,7 +256,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteSession(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val device: Device = Device(UUID.randomUUID(), "testName", Instant.now())
@@ -273,7 +273,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadResource(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val device: Device = Device(UUID.randomUUID(), "testName", Instant.now())
@@ -288,7 +288,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateResource(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val resource: Resource = Resource(UUID.randomUUID(), user.uuid, Instant.now(), 123456L, "hash", "filepath", emptyMap<String, String>())
@@ -304,7 +304,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteResource(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val resource: Resource = Resource(UUID.randomUUID(), user.uuid, Instant.now(), 123456L, "hash", "filepath", emptyMap<String, String>())
@@ -318,7 +318,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadNote(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val note: Note = Note(UUID.randomUUID(), "testTitle", "testToken", user.uuid, Instant.now())
@@ -330,7 +330,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateNote(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val note: Note = Note(UUID.randomUUID(), "testTitle", "testToken", user.uuid, Instant.now())
@@ -346,7 +346,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteNote(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val note: Note = Note(UUID.randomUUID(), "testTitle", "testToken", user.uuid, Instant.now())
@@ -393,7 +393,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun createAndReadGroup(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())
@@ -405,7 +405,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun updateGroup(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())
@@ -421,7 +421,7 @@ class RoomDbInstrumentedTest {
 
     @Test
     fun deleteGroup(): Unit = runBlocking {
-        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", "testNick")
+        val user: User = User(UUID.randomUUID(), "testLogin", "testPass", salt = "testSalt", "testNick")
         userRepository.insert(user)
 
         val group: Group = Group(UUID.randomUUID(), "testGroup", user.uuid, isAuto = true, emptyMap<String, String>())

@@ -25,6 +25,10 @@ class UserRepository @Inject constructor(
         return db.userDao().getDeleted(isDeleted).map { it.map(UserMapper::toDomain) }
     }
 
+    suspend fun getByLogin(login: String): User? {
+        return db.userDao().getByLogin(login)?.let { UserMapper.toDomain(it) }
+    }
+
     override suspend fun delete(domain: User) {
         db.userDao().setDeleted(domain.uuid)
     }
@@ -35,6 +39,10 @@ class UserRepository @Inject constructor(
 
     override suspend fun insert(domain: User) {
         db.userDao().insert(UserMapper.toEntity(domain))
+    }
+
+    suspend fun getCount(login: String): Int {
+        return db.userDao().countByLogin(login)
     }
 
     suspend fun updateTasks(domain: User) {
