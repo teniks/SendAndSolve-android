@@ -7,8 +7,7 @@
 
     <fragment
         android:id="@+id/main_fragment"
-        android:name="su.sendandsolve.core.items.MainFragment"
-        android:label="Main">
+        android:name="su.sendandsolve.core.items.MainFragment">
 
         <action
             android:id="@+id/action_main_to_registration"
@@ -17,12 +16,28 @@
 
     <fragment
         android:id="@+id/registration_fragment"
-        android:name="su.sendandsolve.features.auth.presentation.registration.RegistrationFragment"
-        android:label="Registration">
+        android:name="su.sendandsolve.features.auth.presentation.registration.RegistrationFragment">
 
         <action
             android:id="@+id/action_registration_to_main"
             app:destination="@id/main_fragment"/>
+
+        <action
+            android:id="@+id/action_registration_to_authorization"
+            app:destination="@id/authorization_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/authorization_fragment"
+        android:name="su.sendandsolve.features.auth.presentation.authorization.AuthorizationFragment">
+
+        <action
+            android:id="@+id/action_authorization_to_main"
+            app:destination="@id/main_fragment"/>
+
+        <action
+            android:id="@+id/action_authorization_to_registration"
+            app:destination="@id/registration_fragment"/>
     </fragment>
 
 </navigation>
