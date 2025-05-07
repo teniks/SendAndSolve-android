@@ -25,7 +25,7 @@ data class Note(
     @ColumnInfo(name = "date_creation")
     val creationDate: Instant,
 
-    @ColumnInfo(name = "id_author")
+    @ColumnInfo(name = "author_id")
     val authorId: UUID,
 
     @ColumnInfo(name = "is_deleted")
