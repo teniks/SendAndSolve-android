@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.di
+package su.sendandsolve.core.di
 
 import dagger.Binds
 import dagger.Module
@@ -26,7 +26,7 @@ import su.sendandsolve.features.tasks.domain.model.User
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class RepositoryModule {
+abstract class RepositoryBindModule {
 
     @Binds
     abstract fun bindUserRepository(repository: UserRepository): Repository<User>

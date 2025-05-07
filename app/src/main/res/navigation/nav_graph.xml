@@ -11,13 +11,18 @@
         android:label="Main">
 
         <action
-            android:id="@+id/action_main_to_detail"
-            app:destination="@id/detail_fragment"/>
+            android:id="@+id/action_main_to_registration"
+            app:destination="@id/registration_fragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/detail_fragment"
-        android:name="su.sendandsolve.features.tasks.detail.ui.DetailTaskFragment"
-        android:label="Task Details"/>
+        android:id="@+id/registration_fragment"
+        android:name="su.sendandsolve.features.auth.presentation.registration.RegistrationFragment"
+        android:label="Registration">
+
+        <action
+            android:id="@+id/action_registration_to_main"
+            app:destination="@id/main_fragment"/>
+    </fragment>
 
 </navigation>
