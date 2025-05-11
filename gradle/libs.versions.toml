@@ -14,12 +14,12 @@ ksp = "2.0.21-1.0.27"
 hilt = "2.56.1"
 junitKtx = "1.2.1"
 legacySupportV4 = "1.0.0"
-lifecycleLivedataKtx = "2.8.7"
-lifecycleViewmodelKtx = "2.8.7"
+lifecycleLivedataKtx = "2.9.0"
+lifecycleViewmodelKtx = "2.9.0"
 fragmentKtx = "1.8.6"
 
 splashscreen = "1.0.1"
-navigation = "2.8.9"
+navigation = "2.9.0"
 security-crypto = "1.1.0-alpha07"
 
 [libraries]
