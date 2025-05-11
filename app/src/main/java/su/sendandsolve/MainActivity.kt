@@ -2,6 +2,7 @@ package su.sendandsolve
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -55,10 +56,11 @@ class MainActivity : AppCompatActivity() {
                         isReady = true
                     }
                     is AuthCheckViewModel.AuthState.Error -> {
+                        isReady = true
                         AlertDialog.Builder(this@MainActivity)
                             .setMessage(state.message)
                             .setPositiveButton(getString(R.string.error_positive_button)) { _, _ -> viewModel.checkAuth() }
-                            .setNegativeButton(getString(R.string.error_negative_button)) { _, _ ->  finish() }
+                            .setNegativeButton(getString(R.string.error_negative_button)) { _, _ ->  viewModel.logout() }
                             .show()
                     }
                     is AuthCheckViewModel.AuthState.Loading -> {}

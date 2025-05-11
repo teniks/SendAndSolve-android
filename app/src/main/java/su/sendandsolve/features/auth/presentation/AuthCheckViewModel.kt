@@ -48,6 +48,13 @@ class AuthCheckViewModel @Inject constructor(
         }
     }
 
+    fun logout() {
+        viewModelScope.launch {
+            currentUser.logout()
+            _state.value = AuthState.Unauthenticated
+        }
+    }
+
     sealed class AuthState {
         data object Loading : AuthState()
         data class Authenticated(val userId: UUID) : AuthState()
