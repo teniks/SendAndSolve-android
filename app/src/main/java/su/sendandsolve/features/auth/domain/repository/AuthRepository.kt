@@ -19,11 +19,12 @@ class AuthRepository @Inject constructor(
             }
 
             val userSalt = PasswordHasher.generateSalt()
+            val passwordHashed = PasswordHasher.hash(password, userSalt)
 
             val user = User(
                 uuid = UUID.randomUUID(),
                 login = login,
-                passwordHash = PasswordHasher.hash(password, userSalt),
+                passwordHash = passwordHashed,
                 salt = userSalt,
                 nickname = nickname,
                 lastModified = Instant.now()
@@ -32,8 +33,8 @@ class AuthRepository @Inject constructor(
             userRepository.insert(user)
             currentUser.setCurrentUser(user.uuid)
             Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
+        } catch (ex: Exception) {
+            Result.failure(ex)
         }
     }
 
