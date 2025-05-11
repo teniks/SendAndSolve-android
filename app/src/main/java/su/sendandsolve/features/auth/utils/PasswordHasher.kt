@@ -6,7 +6,7 @@ import java.util.Base64
 object PasswordHasher {
 
     fun generateSalt(): String {
-        val random = ByteArray(16)
+        val random = ByteArray(32)
         java.security.SecureRandom().nextBytes(random)
         return Base64.getEncoder().encodeToString(random)
     }
@@ -15,7 +15,7 @@ object PasswordHasher {
         val digest = MessageDigest.getInstance("SHA-256")
         val saltedPassword = salt + password
         val hashBytes = digest.digest(saltedPassword.toByteArray())
-        return Base64.getEncoder().encodeToString(hashBytes).substring(0, 64)
+        return Base64.getEncoder().encodeToString(hashBytes)
     }
 
     fun verify(password: String, salt: String, storeHash: String): Boolean {

@@ -1,6 +1,7 @@
 package su.sendandsolve.core.di
 
 import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +25,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context) : RoomAppDatabase {
-        return RoomAppDatabase.getAppDataBase(context)
+        //return RoomAppDatabase.getAppDataBase(context)
+        return Room.inMemoryDatabaseBuilder(context, RoomAppDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
     }
 
     @Provides

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".features.auth.presentation.registration.RegistrationFragment">
+    tools:context=".features.auth.presentation.authorization.AuthorizationFragment">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,9 +26,8 @@
             android:hint="@string/login_hint"
             android:textColorHint="@color/white"
             android:textColor="@color/white"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:autofillHints="username"
-            android:maxLength="@integer/max_length_login"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -44,56 +43,21 @@
             android:textColor="@color/white"
             android:inputType="textPassword"
             android:autofillHints="password"
-            android:maxLength="@integer/max_length_password"
             app:layout_constraintTop_toBottomOf="@id/et_login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/margin_standard"/>
-
-        <!-- Пароль -->
-        <EditText
-            android:id="@+id/et_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:hint="@string/repeat_password_hint"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:inputType="textPassword"
-            android:autofillHints="password"
-            android:maxLength="@integer/max_length_password"
-            app:layout_constraintTop_toBottomOf="@id/et_login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/margin_standard"/>
-
-        <!-- Никнейм -->
-        <EditText
-            android:id="@+id/et_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:hint="@string/nickname_hint"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:inputType="text"
-            android:autofillHints="username"
-            android:maxLength="@integer/max_length_nickname"
-            app:layout_constraintTop_toBottomOf="@id/et_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_standard"/>
 
         <!-- Кнопка регистрации -->
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_login"
             style="@style/outlined_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
+            android:text="@string/log_in"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_title"
-            app:layout_constraintTop_toBottomOf="@id/et_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_x2"/>
@@ -117,6 +81,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/red"
         android:visibility="gone"
+        android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -124,14 +89,15 @@
 
 
     <TextView
-        android:id="@+id/tv_already_be"
+        android:id="@+id/tv_first_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/already_have_an_account"
+        android:text="@string/first_time"
         android:textColor="@color/white"
         android:layout_marginBottom="@dimen/margin_x2"
         android:padding="@dimen/margin_x2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

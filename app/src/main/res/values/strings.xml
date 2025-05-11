@@ -12,9 +12,21 @@
     <string name="error_auth_required">Authentication required</string>
     <string name="login_hint">Login</string>
     <string name="password_hint">Password</string>
+    <string name="repeat_password_hint">Repeat the password</string>
     <string name="nickname_hint">Nickname</string>
-    <string name="register_button">Register</string>
+
+    <string name="login_is_not_long_enough">The username must be longer than 5 characters</string>
+    <string name="login_is_to_long">The login must be no longer than 256 characters</string>
+    <string name="password_is_not_long_enough">The password must be no shorter than 8 characters</string>
+    <string name="password_is_to_long">The password must be no longer than 128 characters</string>
+    <string name="passwords_dont_match">The passwords don\'t match</string>
+    <string name="nickname_is_not_long_enough">The alias must be longer than 2 characters</string>
+    <string name="nickname_is_to_long">The alias must be no longer than 256 characters</string>
 
     <string name="error_positive_button">Repeat</string>
-    <string name="error_negative_button">Exit</string>
+    <string name="error_negative_button">Log out</string>
+    <string name="first_time">Don`t have an account?</string>
+    <string name="register">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log in</string>
 </resources>

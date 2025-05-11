@@ -88,7 +88,7 @@ class TagsDialogFragment : DialogFragment() {
     private fun showCreateTagDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Создать тег")
-            .setView(R.layout.dialog_create_tag)
+            .setView(R.layout.tasks_dialog_create_tag)
             .setPositiveButton("Создать") { dialog, _ ->
                 val input = (dialog as AlertDialog).findViewById<TextInputEditText>(R.id.tag_name_edit_text)
                 input?.text?.toString()?.let {

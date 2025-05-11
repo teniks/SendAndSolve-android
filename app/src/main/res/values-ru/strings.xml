@@ -13,9 +13,22 @@
     <string name="error_auth_required">Требуется авторизация</string>
     <string name="login_hint">Логин</string>
     <string name="password_hint">Пароль</string>
+    <string name="repeat_password_hint">Повторите пароль</string>
     <string name="nickname_hint">Никнейм</string>
-    <string name="register_button">Зарегистрироваться</string>
+
+    <string name="login_is_not_long_enough">Логин должен быть длиннее 5 символов</string>
+    <string name="login_is_to_long">Логин должен быть не длиннее 256 символов</string>
+    <string name="password_is_not_long_enough">Пароль должен быть не короче 8 символов</string>
+    <string name="password_is_to_long">Пароль должен быть не длиннее 128 символов</string>
+    <string name="passwords_dont_match">Пароли не совпадают</string>
+    <string name="nickname_is_not_long_enough">Псевдоним должен быть длиннее 2 символов</string>
+    <string name="nickname_is_to_long">Псевдоним должен быть не длиннее 256 символов</string>
+
 
     <string name="error_positive_button">Повторить</string>
-    <string name="error_negative_button">Выйти</string>
+    <string name="error_negative_button">Выйти из аккаунта</string>
+    <string name="first_time">Впервые у нас?</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="already_have_an_account">Уже есть аккаунт?</string>
+    <string name="log_in">Войти</string>
 </resources>
