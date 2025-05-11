@@ -16,10 +16,13 @@ class SessionManager @Inject constructor(
     }
 
     private val prefs = context.getSharedPreferences(FILE, MODE)
+    private var cachedUserId: UUID? = null
 
     suspend fun getCurrentUser(): UUID? {
+        if (cachedUserId != null) return cachedUserId
+
         val userIdString: String = prefs.getString(USER_ID, "").toString()
-        return if (userIdString.isEmpty()) {
+        cachedUserId = if (userIdString.isEmpty()) {
             null
         } else {
             try {
@@ -29,16 +32,19 @@ class SessionManager @Inject constructor(
                 null
             }
         }
+        return cachedUserId
     }
 
     suspend fun setCurrentUser(userId: UUID) {
         with(prefs.edit()) {
             putString(USER_ID, userId.toString())
+            cachedUserId = userId
             apply()
         }
     }
 
     suspend fun logout() {
+        cachedUserId = null
         prefs.edit().remove(USER_ID).apply()
     }
 }
