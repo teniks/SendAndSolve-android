@@ -1,6 +1,8 @@
 package su.sendandsolve
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.activity.enableEdgeToEdge
@@ -39,13 +41,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.navHostFragment.viewTreeObserver.addOnPreDrawListener { isReady }
+        binding.navHostFragment.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    return if (isReady) {
+                        binding.navHostFragment.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        )
 
-        setupObservers()
+        setupObservers(this)
     }
 
-    private fun setupObservers() {
-        lifecycleScope.launch {
+    private fun setupObservers(context: Context) {
+                lifecycleScope.launch {
             viewModel.state.collect { state ->
                 when(state) {
                     is AuthCheckViewModel.AuthState.Authenticated -> {
@@ -59,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                         isReady = true
                         AlertDialog.Builder(this@MainActivity)
                             .setMessage(state.message)
-                            .setPositiveButton(getString(R.string.error_positive_button)) { _, _ -> viewModel.checkAuth() }
+                            .setPositiveButton(getString(R.string.error_positive_button)) { _, _ -> restart(context) }
                             .setNegativeButton(getString(R.string.error_negative_button)) { _, _ ->  viewModel.logout() }
                             .show()
                     }
@@ -67,5 +80,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun restart(context: Context) {
+        val intent: Intent? = context.packageManager.getLaunchIntentForPackage(context.packageName)
+
+        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        context.startActivity(intent)
     }
 }

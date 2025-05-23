@@ -29,4 +29,6 @@
     <string name="register">Sign Up</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="log_in">Log in</string>
+
+    <string name="user_was_not_found">The user was not found</string>
 </resources>

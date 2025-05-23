@@ -31,4 +31,6 @@
     <string name="register">Зарегистрироваться</string>
     <string name="already_have_an_account">Уже есть аккаунт?</string>
     <string name="log_in">Войти</string>
+
+    <string name="user_was_not_found">Пользователь не найден</string>
 </resources>
