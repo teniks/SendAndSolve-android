@@ -24,6 +24,10 @@ class TagRepository @Inject constructor(
         return db.tagDao().getDeleted(isDeleted).map { it.map(TagMapper::toDomain)}
     }
 
+    fun getByTask(taskId: UUID, isDeleted: Boolean = false): Flow<List<Tag>> {
+        return db.tagDao().getByTask(taskId, isDeleted).map { it.map(TagMapper::toDomain) }
+    }
+
     override suspend fun delete(domain: Tag) {
         db.tagDao().setDeleted(domain.uuid)
     }

@@ -10,8 +10,14 @@ import java.util.UUID
 
 @Dao
 interface TagDao {
+    @Query("SELECT * FROM tags WHERE is_deleted = :isDeleted LIMIT :limit OFFSET :offset")
+    fun getTags(limit: Int, offset: Int, isDeleted: Boolean = false): Flow<List<Tag>>
+
     @Query("SELECT * FROM tags WHERE uuid = :tagId AND is_deleted = :isDeleted")
     suspend fun getById(tagId: UUID, isDeleted: Boolean = false): Tag?
+
+    @Query("SELECT * FROM tags WHERE uuid IN (SELECT tag_id FROM task_tags WHERE task_id = :taskId AND is_deleted = :isDeleted)")
+    fun getByTask(taskId: UUID, isDeleted: Boolean = false): Flow<List<Tag>>
 
     @Query("SELECT * FROM tags WHERE is_synced = :isSynced")
     fun getSynced(isSynced: Boolean = false): Flow<List<Tag>>

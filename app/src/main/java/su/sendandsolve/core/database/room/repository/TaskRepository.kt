@@ -114,6 +114,13 @@ class TaskRepository @Inject constructor(
     suspend fun updateTags(domain: Task) {
         domain.run {
             tags.forEach { tag ->
+
+                val setRead: () -> Unit = {
+                    tags.toMutableMap().apply {
+                        this[tag.key] = DomainState.Read
+                    }
+                }
+
                 when (tag.value) {
                     DomainState.Insert -> {
                         db.taskTagDao().insert(
@@ -126,6 +133,8 @@ class TaskRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
+
+                        setRead()
                     }
 
                     DomainState.Delete -> {
@@ -133,7 +142,8 @@ class TaskRepository @Inject constructor(
                         db.taskTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
-                        tags[tag.key] = DomainState.Read
+
+                        setRead()
                     }
 
                     DomainState.Recover -> {
@@ -141,6 +151,8 @@ class TaskRepository @Inject constructor(
                         db.taskTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
+
+                        setRead()
                     }
 
                     DomainState.Read -> {}
@@ -152,6 +164,13 @@ class TaskRepository @Inject constructor(
     suspend fun updateResources(domain: Task) {
         domain.run {
             resources.forEach { resource ->
+
+                val setRead: () -> Unit = {
+                    resources.toMutableMap().apply {
+                        this[resource.key] = DomainState.Read
+                    }
+                }
+
                 when (resource.value) {
                     DomainState.Insert -> {
                         db.taskResourceDao().insert(
@@ -164,7 +183,8 @@ class TaskRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        resources[resource.key] = DomainState.Read
+
+                        setRead()
                     }
 
                     DomainState.Delete -> {
@@ -172,7 +192,8 @@ class TaskRepository @Inject constructor(
                         db.taskResourceDao().setSynced(resource.key.uuid, this.uuid, false)
                         resource.key.isDeleted = true
                         resource.key.isSynced = false
-                        resources[resource.key] = DomainState.Read
+
+                        setRead()
                     }
 
                     DomainState.Recover -> {
@@ -180,6 +201,8 @@ class TaskRepository @Inject constructor(
                         db.taskResourceDao().setSynced(resource.key.uuid, this.uuid, false)
                         resource.key.isDeleted = true
                         resource.key.isSynced = false
+
+                        setRead()
                     }
 
                     DomainState.Read -> {}
@@ -191,6 +214,13 @@ class TaskRepository @Inject constructor(
     suspend fun updateNotes(domain: Task) {
         domain.run {
             notes.forEach { note ->
+
+                val setRead: () -> Unit = {
+                    notes.toMutableMap().apply {
+                        this[note.key] = DomainState.Read
+                    }
+                }
+
                 when (note.value) {
                     DomainState.Insert -> {
                         db.noteTaskDao().insert(
@@ -203,7 +233,8 @@ class TaskRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        notes[note.key] = DomainState.Read
+
+                        setRead()
                     }
 
                     DomainState.Delete -> {
@@ -211,7 +242,8 @@ class TaskRepository @Inject constructor(
                         db.noteTaskDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
-                        notes[note.key] = DomainState.Read
+
+                        setRead()
                     }
 
                     DomainState.Recover -> {
@@ -219,6 +251,8 @@ class TaskRepository @Inject constructor(
                         db.noteTaskDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
+
+                        setRead()
                     }
 
                     DomainState.Read -> {}
