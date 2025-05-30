@@ -7,6 +7,9 @@
     android:checkable="true"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
     android:backgroundTint="@color/unselected_tag"
-    android:textColor="@color/white">
+    android:textColor="@color/white"
+    android:textSize="@dimen/text_size_main"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard">
 
 </com.google.android.material.chip.Chip>
