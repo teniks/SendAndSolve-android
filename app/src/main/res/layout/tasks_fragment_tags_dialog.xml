@@ -1,50 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/margin_x2"
-    tools:context=".features.tasks.detail.ui.tags.TagsDialogFragment">
+    tools:context=".features.tasks.detail.ui.tags.TagsSelectionFragmentDialog">
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Выберите теги"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/margin_x2"/>
+        app:endIconMode="clear_text"
+        app:endIconDrawable="@android:drawable/ic_menu_close_clear_cancel">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tag_search"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tags_recycler"
+        android:id="@+id/recycler_tags"
         android:layout_width="match_parent"
         tools:listitem="@layout/tasks_item_chip"
         android:layout_height="@dimen/tags_dialog_height"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="@dimen/margin_x2">
-
-        <Button
-            android:id="@+id/cancel_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Отмена"
-            android:textColor="@color/white"
-            style="@style/outlined_button"
-            android:layout_margin="@dimen/margin_standard"/>
-
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Сохранить"
-            android:textColor="@color/white"
-            style="@style/outlined_button"
-            android:layout_margin="@dimen/margin_standard"/>
-    </LinearLayout>
 </LinearLayout>

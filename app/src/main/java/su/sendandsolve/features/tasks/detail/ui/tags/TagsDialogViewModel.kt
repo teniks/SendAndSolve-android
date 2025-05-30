@@ -20,12 +20,12 @@ class TagsDialogViewModel @Inject constructor(
     private val repository: Repository<Tag>
 ) : ViewModel() {
 
-    private val _tags = MutableStateFlow<List<Tag>>(emptyList())
-    private val _selectedTags = MutableStateFlow<Set<UUID>>(emptySet())
+    private val tags = MutableStateFlow<List<Tag>>(emptyList())
+    private val selectedTags = MutableStateFlow<Set<Tag>>(emptySet())
 
     val uiState: StateFlow<TagsDialogState> = combine(
-        _tags,          // Следим за тегами
-        _selectedTags // И выбранными ID
+        tags,          // Следим за тегами
+        selectedTags // И выбранными ID
     ) { tags, selected ->
         TagsDialogState(tags, selected) // Объединяем в одно состояние
     }.stateIn(
@@ -35,7 +35,16 @@ class TagsDialogViewModel @Inject constructor(
     )
 
     init {
-        loadTags()
+        tags.value = testData()
+    }
+
+
+    private fun testData(): List<Tag> {
+        return listOf(
+            Tag(UUID.randomUUID(), "Важно"),
+            Tag(UUID.randomUUID(), "Работа"),
+            Tag(UUID.randomUUID(), "Дом")
+        )
     }
 
     private fun loadTags() {
@@ -43,14 +52,15 @@ class TagsDialogViewModel @Inject constructor(
             repository
                 .getAll()
                 .collect { t ->
-                    _tags.value = t
+                    tags.value = t
                 }
         }
     }
 
-    fun toggleTagSelection(tagId: UUID) {
-        _selectedTags.update { selected ->
-            if (selected.contains(tagId)) selected - tagId else selected + tagId
+    fun toggleTagSelection(tag: Tag) {
+        selectedTags.update { selected ->
+            if (selected.contains(tag)) selected - tag
+            else selected + tag
         }
     }
 
@@ -59,5 +69,9 @@ class TagsDialogViewModel @Inject constructor(
             val newTag = Tag(UUID.randomUUID(), name)
             repository.insert(newTag)
         }
+    }
+
+    fun setSelectedTags(tags: Set<Tag>) {
+        selectedTags.value = tags
     }
 }

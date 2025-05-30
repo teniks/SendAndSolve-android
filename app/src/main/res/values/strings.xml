@@ -30,5 +30,14 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="log_in">Log in</string>
 
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="select_tags">Select tags</string>
+    <string name="create_tag">Create tag</string>
+    <string name="delete_selected_tag">Delete selected tag?</string>
+
     <string name="user_was_not_found">The user was not found</string>
+    <string name="you_want_delete_selected_tag">Are you sure you want to delete the selected tag?</string>
+    <string name="tag_search">Tag search</string>
 </resources>

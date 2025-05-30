@@ -8,13 +8,20 @@ import com.google.android.material.chip.Chip
 import su.sendandsolve.databinding.TasksItemChipBinding
 import su.sendandsolve.features.tasks.domain.model.Tag
 
-class SelectedTagsAdapter : RecyclerView.Adapter<SelectedTagsAdapter.ViewHolder>() {
+class TagAdapter(
+    private val onTagClick: (Tag) -> Unit
+) : RecyclerView.Adapter<TagAdapter.ViewHolder>() {
 
-    private val items = mutableListOf<Tag>()
+    private val items: MutableList<Tag> = mutableListOf()
 
     inner class ViewHolder(private val chip: Chip) : RecyclerView.ViewHolder(chip) {
         fun bind(tag: Tag) {
             chip.text = tag.name
+            chip.isCheckable = false
+            chip.setOnLongClickListener {
+                onTagClick(tag)
+                return@setOnLongClickListener true
+            }
         }
     }
 
@@ -51,7 +58,9 @@ class SelectedTagsAdapter : RecyclerView.Adapter<SelectedTagsAdapter.ViewHolder>
     }
 
     fun submitList(newList: List<Tag>) {
-        val diffResult = DiffUtil.calculateDiff(TagsDiffCallback(items, newList))
+        val oldList = ArrayList(items)
+        val diffResult = DiffUtil.calculateDiff(TagsDiffCallback(oldList, newList))
+
         items.clear()
         items.addAll(newList)
         diffResult.dispatchUpdatesTo(this)
