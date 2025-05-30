@@ -30,6 +30,18 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="log_in">Log in</string>
 
+
+    <string name="status_NEW">New</string>
+    <string name="status_IN_PROGRESS">In progress</string>
+    <string name="status_ON_HOLD">On hold</string>
+    <string name="status_COMPLETED">Completed</string>
+    <string name="status_CANCELLED">Cancelled</string>
+
+    <string name="priority_CRITICAL">Important and urgent</string>
+    <string name="priority_STRATEGIC">Important, but not urgent</string>
+    <string name="priority_TACTICAL">Urgent, but not important</string>
+    <string name="priority_BACKGROUND">Neither important, nor urgent</string>
+
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 

@@ -24,13 +24,24 @@
     <string name="nickname_is_not_long_enough">Псевдоним должен быть длиннее 2 символов</string>
     <string name="nickname_is_to_long">Псевдоним должен быть не длиннее 256 символов</string>
 
-
     <string name="error_positive_button">Повторить</string>
     <string name="error_negative_button">Выйти из аккаунта</string>
     <string name="first_time">Впервые у нас?</string>
     <string name="register">Зарегистрироваться</string>
     <string name="already_have_an_account">Уже есть аккаунт?</string>
     <string name="log_in">Войти</string>
+
+
+    <string name="status_NEW">Новая</string>
+    <string name="status_IN_PROGRESS">В работе</string>
+    <string name="status_ON_HOLD">На паузе</string>
+    <string name="status_COMPLETED">Завершена</string>
+    <string name="status_CANCELLED">Отменена</string>
+
+    <string name="priority_CRITICAL">Важно и срочно</string>
+    <string name="priority_STRATEGIC">Важно, но не срочно</string>
+    <string name="priority_TACTICAL">Срочно, но не важно</string>
+    <string name="priority_BACKGROUND">Ни важно, ни срочно</string>
 
     <string name="save">Сохранить</string>
     <string name="cancel">Отменить</string>
