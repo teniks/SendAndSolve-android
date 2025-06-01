@@ -54,7 +54,8 @@ class TagRepository @Inject constructor(
                                 dataVersion = 0,
                                 lastModified = Instant.now())
                         )
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Delete -> {
@@ -62,7 +63,8 @@ class TagRepository @Inject constructor(
                         db.taskTagDao().setSynced(task.key.uuid, this.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
                     }
 
                     DomainState.Recover -> {
@@ -70,7 +72,9 @@ class TagRepository @Inject constructor(
                         db.taskTagDao().setSynced(task.key.uuid, this.uuid, false)
                         task.key.isDeleted = false
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Read -> {}
@@ -94,7 +98,8 @@ class TagRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        notes[note.key] = DomainState.Read
+
+                        domain.setReadNote(note.key)
                     }
 
                     DomainState.Delete -> {
@@ -102,7 +107,8 @@ class TagRepository @Inject constructor(
                         db.taskTagDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = true
                         note.key.isSynced = false
-                        notes[note.key] = DomainState.Read
+
+                        domain.deleteNote(note.key)
                     }
 
                     DomainState.Recover -> {
@@ -110,7 +116,8 @@ class TagRepository @Inject constructor(
                         db.taskTagDao().setSynced(note.key.uuid, this.uuid, false)
                         note.key.isDeleted = false
                         note.key.isSynced = false
-                        notes[note.key] = DomainState.Read
+
+                        domain.setReadNote(note.key)
                     }
 
                     DomainState.Read -> {}

@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import su.sendandsolve.core.database.room.RoomAppDatabase
 import su.sendandsolve.core.database.room.entity.NoteTask
+import su.sendandsolve.core.database.room.entity.TaskAssignment
 import su.sendandsolve.core.database.room.entity.TaskHierarchy
 import su.sendandsolve.core.database.room.entity.TaskResource
 import su.sendandsolve.core.database.room.entity.TaskTag
@@ -40,34 +41,39 @@ class TaskRepository @Inject constructor(
 
     suspend fun updateTasks(domain: Task) {
         domain.run {
-            childTasks.forEach { note ->
-                when (note.value) {
+            childTasks.forEach { child ->
+                when (child.value) {
                     DomainState.Insert -> {
                         db.taskHierarchyDao().insert(
                             TaskHierarchy(
                                 parentId = this.uuid,
-                                childId = note.key.uuid,
+                                childId = child.key.uuid,
                                 isDeleted = false,
                                 isSynced = false,
                                 dataVersion = 0,
                                 lastModified = Instant.now()
                             )
                         )
+
+                        domain.setReadChildTask(child.key)
                     }
 
                     DomainState.Delete -> {
-                        db.taskHierarchyDao().setDeleted(this.uuid, note.key.uuid)
-                        db.taskHierarchyDao().setSynced(this.uuid, note.key.uuid, false)
-                        note.key.isDeleted = true
-                        note.key.isSynced = false
+                        db.taskHierarchyDao().setDeleted(this.uuid, child.key.uuid)
+                        db.taskHierarchyDao().setSynced(this.uuid, child.key.uuid, false)
+                        child.key.isDeleted = true
+                        child.key.isSynced = false
 
+                        domain.deleteChildTask(child.key)
                     }
 
                     DomainState.Recover -> {
-                        db.taskHierarchyDao().setDeleted(this.uuid, note.key.uuid)
-                        db.taskHierarchyDao().setSynced(this.uuid, note.key.uuid, false)
-                        note.key.isDeleted = true
-                        note.key.isSynced = false
+                        db.taskHierarchyDao().setDeleted(this.uuid, child.key.uuid)
+                        db.taskHierarchyDao().setSynced(this.uuid, child.key.uuid, false)
+                        child.key.isDeleted = true
+                        child.key.isSynced = false
+
+                        domain.setReadChildTask(child.key)
                     }
 
                     DomainState.Read -> {}
@@ -75,12 +81,13 @@ class TaskRepository @Inject constructor(
             }
         }
         domain.run {
-            parentTasks.forEach { note ->
-                when (note.value) {
+            parentTasks.forEach { parent ->
+
+                when (parent.value) {
                     DomainState.Insert -> {
                         db.taskHierarchyDao().insert(
                             TaskHierarchy(
-                                parentId = note.key.uuid,
+                                parentId = parent.key.uuid,
                                 childId = this.uuid,
                                 isDeleted = false,
                                 isSynced = false,
@@ -88,21 +95,26 @@ class TaskRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
+
+                        domain.setReadParentTask(parent.key)
                     }
 
                     DomainState.Delete -> {
-                        db.taskHierarchyDao().setDeleted(note.key.uuid, this.uuid)
-                        db.taskHierarchyDao().setSynced(note.key.uuid, this.uuid, false)
-                        note.key.isDeleted = true
-                        note.key.isSynced = false
+                        db.taskHierarchyDao().setDeleted(parent.key.uuid, this.uuid)
+                        db.taskHierarchyDao().setSynced(parent.key.uuid, this.uuid, false)
+                        parent.key.isDeleted = true
+                        parent.key.isSynced = false
 
+                        domain.deleteParentTask(parent.key)
                     }
 
                     DomainState.Recover -> {
-                        db.taskHierarchyDao().setDeleted(note.key.uuid, this.uuid, false)
-                        db.taskHierarchyDao().setSynced(note.key.uuid, this.uuid, false)
-                        note.key.isDeleted = true
-                        note.key.isSynced = false
+                        db.taskHierarchyDao().setDeleted(parent.key.uuid, this.uuid, false)
+                        db.taskHierarchyDao().setSynced(parent.key.uuid, this.uuid, false)
+                        parent.key.isDeleted = true
+                        parent.key.isSynced = false
+
+                        domain.setReadParentTask(parent.key)
                     }
 
                     DomainState.Read -> {}
@@ -114,13 +126,6 @@ class TaskRepository @Inject constructor(
     suspend fun updateTags(domain: Task) {
         domain.run {
             tags.forEach { tag ->
-
-                val setRead: () -> Unit = {
-                    tags.toMutableMap().apply {
-                        this[tag.key] = DomainState.Read
-                    }
-                }
-
                 when (tag.value) {
                     DomainState.Insert -> {
                         db.taskTagDao().insert(
@@ -134,7 +139,7 @@ class TaskRepository @Inject constructor(
                             )
                         )
 
-                        setRead()
+                        domain.setReadTag(tag.key)
                     }
 
                     DomainState.Delete -> {
@@ -143,7 +148,7 @@ class TaskRepository @Inject constructor(
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
 
-                        setRead()
+                        domain.addTag(tag.key)
                     }
 
                     DomainState.Recover -> {
@@ -152,7 +157,7 @@ class TaskRepository @Inject constructor(
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
 
-                        setRead()
+                        domain.setReadTag(tag.key)
                     }
 
                     DomainState.Read -> {}
@@ -164,13 +169,6 @@ class TaskRepository @Inject constructor(
     suspend fun updateResources(domain: Task) {
         domain.run {
             resources.forEach { resource ->
-
-                val setRead: () -> Unit = {
-                    resources.toMutableMap().apply {
-                        this[resource.key] = DomainState.Read
-                    }
-                }
-
                 when (resource.value) {
                     DomainState.Insert -> {
                         db.taskResourceDao().insert(
@@ -184,7 +182,7 @@ class TaskRepository @Inject constructor(
                             )
                         )
 
-                        setRead()
+                        domain.setReadResource(resource.key)
                     }
 
                     DomainState.Delete -> {
@@ -193,7 +191,7 @@ class TaskRepository @Inject constructor(
                         resource.key.isDeleted = true
                         resource.key.isSynced = false
 
-                        setRead()
+                        domain.deleteResource(resource.key)
                     }
 
                     DomainState.Recover -> {
@@ -202,7 +200,7 @@ class TaskRepository @Inject constructor(
                         resource.key.isDeleted = true
                         resource.key.isSynced = false
 
-                        setRead()
+                        domain.setReadResource(resource.key)
                     }
 
                     DomainState.Read -> {}
@@ -214,19 +212,12 @@ class TaskRepository @Inject constructor(
     suspend fun updateNotes(domain: Task) {
         domain.run {
             notes.forEach { note ->
-
-                val setRead: () -> Unit = {
-                    notes.toMutableMap().apply {
-                        this[note.key] = DomainState.Read
-                    }
-                }
-
                 when (note.value) {
                     DomainState.Insert -> {
                         db.noteTaskDao().insert(
                             NoteTask(
                                 noteId = note.key.uuid,
-                                taskId = this.uuid,
+                                taskId = domain.uuid,
                                 isDeleted = false,
                                 isSynced = false,
                                 dataVersion = 0,
@@ -234,7 +225,7 @@ class TaskRepository @Inject constructor(
                             )
                         )
 
-                        setRead()
+                        domain.setReadNote(note.key)
                     }
 
                     DomainState.Delete -> {
@@ -243,7 +234,7 @@ class TaskRepository @Inject constructor(
                         note.key.isDeleted = true
                         note.key.isSynced = false
 
-                        setRead()
+                        domain.deleteNote(note.key)
                     }
 
                     DomainState.Recover -> {
@@ -252,7 +243,50 @@ class TaskRepository @Inject constructor(
                         note.key.isDeleted = true
                         note.key.isSynced = false
 
-                        setRead()
+                        domain.setReadNote(note.key)
+                    }
+
+                    DomainState.Read -> {}
+                }
+            }
+        }
+    }
+
+    suspend fun updateExecutors(domain: Task) {
+        domain.run {
+            executors.forEach { user ->
+                when (user.value) {
+                    DomainState.Insert -> {
+                        db.taskAssignmentDao().insert(
+                            TaskAssignment(
+                                taskId = domain.uuid,
+                                userId = user.key.uuid,
+                                isDeleted = false,
+                                isSynced = false,
+                                dataVersion = 0,
+                                lastModified = Instant.now()
+                            )
+                        )
+
+                        domain.setReadExecutor(user.key)
+                    }
+
+                    DomainState.Delete -> {
+                        db.taskAssignmentDao().setDelete(user.key.uuid, this.uuid, true)
+                        db.taskAssignmentDao().setSynced(user.key.uuid, this.uuid, false)
+                        user.key.isDeleted = true
+                        user.key.isSynced = false
+
+                        domain.deleteExecutor(user.key)
+                    }
+
+                    DomainState.Recover -> {
+                        db.taskAssignmentDao().setDelete(user.key.uuid, this.uuid, false)
+                        db.taskAssignmentDao().setSynced(user.key.uuid, this.uuid, false)
+                        user.key.isDeleted = false
+                        user.key.isSynced = false
+
+                        domain.setReadExecutor(user.key)
                     }
 
                     DomainState.Read -> {}

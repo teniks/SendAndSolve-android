@@ -30,6 +30,9 @@ data class User(
     @ColumnInfo(name = "nickname")
     val nickname: String,
 
+    @ColumnInfo(name = "image_path")
+    val imagePath: String? = null,
+
     @ColumnInfo(name = "is_deleted")
     val isDeleted: Boolean = false,
 

@@ -60,7 +60,8 @@ class UserRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Delete -> {
@@ -68,7 +69,8 @@ class UserRepository @Inject constructor(
                         db.taskAssignmentDao().setSynced(task.key.uuid, this.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
                     }
 
                     DomainState.Recover -> {
@@ -76,7 +78,8 @@ class UserRepository @Inject constructor(
                         db.taskAssignmentDao().setSynced(task.key.uuid, this.uuid, false)
                         task.key.isDeleted = false
                         task.key.isSynced = true
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Read -> {}
@@ -101,7 +104,8 @@ class UserRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        teams[team.key] = DomainState.Read
+
+                        domain.setReadTeam(team.key)
                     }
 
                     DomainState.Delete -> {
@@ -109,7 +113,8 @@ class UserRepository @Inject constructor(
                         db.teamMemberDao().setSynced(this.uuid, team.key.uuid, false)
                         team.key.isDeleted = true
                         team.key.isSynced = false
-                        teams[team.key] = DomainState.Read
+
+                        domain.deleteTeam(team.key)
                     }
 
                     DomainState.Recover -> {
@@ -117,7 +122,8 @@ class UserRepository @Inject constructor(
                         db.teamMemberDao().setSynced(this.uuid, team.key.uuid, false)
                         team.key.isDeleted = false
                         team.key.isSynced = true
-                        teams[team.key] = DomainState.Read
+
+                        domain.setReadTeam(team.key)
                     }
 
                     DomainState.Read -> {}

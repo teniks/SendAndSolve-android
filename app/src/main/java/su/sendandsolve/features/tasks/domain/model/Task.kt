@@ -22,6 +22,7 @@ data class Task(
     var parentTasks: Map<Task, DomainState> = emptyMap(),
     var resources: Map<Resource, DomainState> = emptyMap(),
     var notes: Map<Note, DomainState> = emptyMap(),
+    var executors: Map<User, DomainState> = emptyMap(),
     override var isDeleted: Boolean = false,
     override var isSynced: Boolean = false,
     override var dataVersion: Int = 0,
@@ -38,6 +39,12 @@ data class Task(
         }
     )
 
+    fun setReadTag(tag: Tag) = copy(
+        tags = tags.toMutableMap().apply {
+            this[tag] = DomainState.Read
+        }
+    )
+
     fun addChildTask(task: Task) = copy(
         childTasks = childTasks + (task to DomainState.Insert)
     )
@@ -45,6 +52,12 @@ data class Task(
     fun deleteChildTask(task: Task) = copy(
         childTasks = childTasks.toMutableMap().apply {
             this[task] = DomainState.Delete
+        }
+    )
+
+    fun setReadChildTask(task: Task) = copy(
+        childTasks = childTasks.toMutableMap().apply {
+            this[task] = DomainState.Read
         }
     )
 
@@ -58,6 +71,12 @@ data class Task(
         }
     )
 
+    fun setReadParentTask(task: Task) = copy(
+        parentTasks = parentTasks.toMutableMap().apply {
+            this[task] = DomainState.Read
+        }
+    )
+
     fun addResource(resource: Resource) = copy(
         resources = resources + (resource to DomainState.Insert)
     )
@@ -68,6 +87,12 @@ data class Task(
         }
     )
 
+    fun setReadResource(resource: Resource) = copy(
+        resources = resources.toMutableMap().apply {
+            this[resource] = DomainState.Read
+        }
+    )
+
     fun addNote(note: Note) = copy(
         notes = notes + (note to DomainState.Insert)
     )
@@ -75,6 +100,30 @@ data class Task(
     fun deleteNote(note: Note) = copy(
         notes = notes.toMutableMap().apply {
             this[note] = DomainState.Delete
+        }
+    )
+
+    fun setReadNote(note: Note) = copy(
+        notes = notes.toMutableMap().apply {
+            this[note] = DomainState.Read
+        }
+    )
+
+    fun addExecutor(user: User) = copy(
+        executors = executors.toMutableMap().apply {
+            this[user] = DomainState.Insert
+        }
+    )
+
+    fun deleteExecutor(user: User) = copy(
+        executors = executors.toMutableMap().apply {
+            this[user] = DomainState.Delete
+        }
+    )
+
+    fun setReadExecutor(user: User) = copy(
+        executors = executors.toMutableMap().apply {
+            this[user] = DomainState.Read
         }
     )
 
@@ -116,5 +165,13 @@ data class Task(
 
     fun getNotesByNotState(state: DomainState): Map<Note, DomainState> {
         return notes.filterValues { value -> value != state }
+    }
+
+    fun getExecutorsByState(state: DomainState): Map<User, DomainState> {
+        return executors.filterValues { value -> value == state }
+    }
+
+    fun getExecutorsByNotState(state: DomainState): Map<User, DomainState> {
+        return executors.filterValues { value -> value != state }
     }
 }

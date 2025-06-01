@@ -50,7 +50,8 @@ class GroupRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Delete -> {
@@ -58,7 +59,8 @@ class GroupRepository @Inject constructor(
                         db.taskGroupDao().setSynced(groupId = this.uuid, taskId = task.key.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
                     }
 
                     DomainState.Recover -> {
@@ -66,7 +68,8 @@ class GroupRepository @Inject constructor(
                         db.taskGroupDao().setSynced(groupId = this.uuid, taskId = task.key.uuid, false)
                         task.key.isDeleted = false
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Read -> {}

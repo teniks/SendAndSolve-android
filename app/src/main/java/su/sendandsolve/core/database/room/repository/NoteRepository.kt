@@ -51,7 +51,8 @@ class NoteRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Delete -> {
@@ -59,7 +60,8 @@ class NoteRepository @Inject constructor(
                         db.noteTaskDao().setSynced(this.uuid, task.key.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
                     }
 
                     DomainState.Recover -> {
@@ -67,7 +69,8 @@ class NoteRepository @Inject constructor(
                         db.noteTaskDao().setSynced(this.uuid, task.key.uuid, false)
                         task.key.isDeleted = false
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Read -> {}
@@ -91,7 +94,8 @@ class NoteRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        tags[tag.key] = DomainState.Read
+
+                        domain.setReadTag(tag.key)
                     }
 
                     DomainState.Delete -> {
@@ -99,7 +103,8 @@ class NoteRepository @Inject constructor(
                         db.noteTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = true
                         tag.key.isSynced = false
-                        tags[tag.key] = DomainState.Read
+
+                        domain.deleteTag(tag.key)
                     }
 
                     DomainState.Recover -> {
@@ -107,7 +112,8 @@ class NoteRepository @Inject constructor(
                         db.noteTagDao().setSynced(this.uuid, tag.key.uuid, false)
                         tag.key.isDeleted = false
                         tag.key.isSynced = false
-                        tags[tag.key] = DomainState.Read
+
+                        domain.setReadTag(tag.key)
                     }
 
                     DomainState.Read -> {}

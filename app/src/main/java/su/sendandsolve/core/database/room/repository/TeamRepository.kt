@@ -51,7 +51,7 @@ class TeamRepository @Inject constructor(
                                 lastModified = Instant.now())
                         )
 
-                        members[member.key] = DomainState.Read
+                        domain.setReadMember(member.key)
                     }
 
                     DomainState.Delete -> {
@@ -59,7 +59,8 @@ class TeamRepository @Inject constructor(
                         db.teamMemberDao().setSynced(member.key.uuid, this.uuid, false)
                         member.key.isDeleted = true
                         member.key.isSynced = false
-                        members[member.key] = DomainState.Read
+
+                        domain.setReadMember(member.key)
                     }
 
                     DomainState.Recover -> {
@@ -67,7 +68,8 @@ class TeamRepository @Inject constructor(
                         db.teamMemberDao().setSynced(member.key.uuid, this.uuid, false)
                         member.key.isDeleted = false
                         member.key.isSynced = true
-                        members[member.key] = DomainState.Read
+
+                        domain.setReadMember(member.key)
                     }
 
                     DomainState.Read -> {}

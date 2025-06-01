@@ -50,7 +50,8 @@ class ResourceRepository @Inject constructor(
                                 lastModified = Instant.now()
                             )
                         )
-                        tasks[task.key] = DomainState.Read
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Delete -> {
@@ -58,7 +59,8 @@ class ResourceRepository @Inject constructor(
                         db.taskResourceDao().setSynced(task.key.uuid, domain.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
-                        tasks[task.key] = DomainState.Read
+
+                        domain.deleteTask(task.key)
                     }
 
                     DomainState.Recover -> {
@@ -66,6 +68,8 @@ class ResourceRepository @Inject constructor(
                         db.taskResourceDao().setSynced(task.key.uuid, domain.uuid, false)
                         task.key.isDeleted = true
                         task.key.isSynced = false
+
+                        domain.setReadTask(task.key)
                     }
 
                     DomainState.Read -> {  }
