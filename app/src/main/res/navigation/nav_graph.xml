@@ -20,7 +20,9 @@
 
         <action
             android:id="@+id/action_registration_to_main"
-            app:destination="@id/main_fragment"/>
+            app:destination="@id/main_fragment"
+            app:popUpTo="@id/main_fragment"
+            app:popUpToInclusive="true"/>
 
         <action
             android:id="@+id/action_registration_to_authorization"
@@ -33,7 +35,9 @@
 
         <action
             android:id="@+id/action_authorization_to_main"
-            app:destination="@id/main_fragment"/>
+            app:destination="@id/main_fragment"
+            app:popUpTo="@id/main_fragment"
+            app:popUpToInclusive="false"/>
 
         <action
             android:id="@+id/action_authorization_to_registration"
