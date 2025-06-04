@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.detail.ui.tags
+package su.sendandsolve.features.tasks.detail.tags
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,16 +16,16 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class TagsDialogViewModel @Inject constructor(
+class TagsSelectionDialogViewModel @Inject constructor(
     private val repository: Repository<Tag>
 ) : ViewModel() {
 
-    private val tags = MutableStateFlow<List<Tag>>(emptyList())
-    private val selectedTags = MutableStateFlow<Set<Tag>>(emptySet())
+    private val items = MutableStateFlow<List<Tag>>(emptyList())
+    private val selectedItems = MutableStateFlow<Set<Tag>>(emptySet())
 
     val uiState: StateFlow<TagsDialogState> = combine(
-        tags,          // Следим за тегами
-        selectedTags // И выбранными ID
+        items,          // Следим за тегами
+        selectedItems // И выбранными ID
     ) { tags, selected ->
         TagsDialogState(tags, selected) // Объединяем в одно состояние
     }.stateIn(
@@ -35,7 +35,7 @@ class TagsDialogViewModel @Inject constructor(
     )
 
     init {
-        tags.value = testData()
+        items.value = testData()
     }
 
 
@@ -47,31 +47,31 @@ class TagsDialogViewModel @Inject constructor(
         )
     }
 
-    private fun loadTags() {
+    private fun loadItems() {
         viewModelScope.launch {
             repository
                 .getAll()
                 .collect { t ->
-                    tags.value = t
+                    items.value = t
                 }
         }
     }
 
-    fun toggleTagSelection(tag: Tag) {
-        selectedTags.update { selected ->
-            if (selected.contains(tag)) selected - tag
-            else selected + tag
+    fun toggleItemSelection(item: Tag) {
+        selectedItems.update { selected ->
+            if (selected.contains(item)) selected - item
+            else selected + item
         }
     }
 
-    fun createTag(name: String) {
+    fun createItem(name: String) {
         viewModelScope.launch {
             val newTag = Tag(UUID.randomUUID(), name)
             repository.insert(newTag)
         }
     }
 
-    fun setSelectedTags(tags: Set<Tag>) {
-        selectedTags.value = tags
+    fun setSelectedItems(items: Set<Tag>) {
+        selectedItems.value = items
     }
 }

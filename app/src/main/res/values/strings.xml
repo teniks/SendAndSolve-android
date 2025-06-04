@@ -8,6 +8,7 @@
     <string name="scope_task_hint">Category</string>
     <string name="start_date_hint">Start date</string>
     <string name="end_date_hint">End date</string>
+    <string name="tags_task_hint">Tags</string>
     <string name="executors">Executors</string>
 
     <string name="error_auth_required">Authentication required</string>

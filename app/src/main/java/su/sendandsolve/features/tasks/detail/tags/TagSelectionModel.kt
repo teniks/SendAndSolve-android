@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.detail.ui.tags
+package su.sendandsolve.features.tasks.detail.tags
 
 import su.sendandsolve.features.tasks.domain.model.Tag
 

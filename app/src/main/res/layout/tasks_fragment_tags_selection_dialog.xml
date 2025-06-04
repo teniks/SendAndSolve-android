@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/margin_x2"
-    tools:context=".features.tasks.detail.ui.tags.TagsSelectionFragmentDialog">
+    tools:context=".features.tasks.detail.tags.TagsSelectionDialogFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

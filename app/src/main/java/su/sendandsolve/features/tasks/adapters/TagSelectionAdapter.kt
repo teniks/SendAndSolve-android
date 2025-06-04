@@ -1,6 +1,7 @@
 package su.sendandsolve.features.tasks.adapters
 
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import su.sendandsolve.R
-import su.sendandsolve.features.tasks.detail.ui.tags.TagSelectionModel
+import su.sendandsolve.features.tasks.detail.tags.TagSelectionModel
 import su.sendandsolve.features.tasks.domain.model.Tag
 
 class TagSelectionAdapter(
@@ -23,7 +24,7 @@ class TagSelectionAdapter(
     inner class TagChipViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val chip: Chip = view.findViewById(R.id.chip)
 
-        fun bind(item: TagSelectionModel){
+        fun bind(item: TagSelectionModel) {
             (chip).apply {
                 text = item.tag.name
 
@@ -41,6 +42,12 @@ class TagSelectionAdapter(
 
         private fun updateAppearance(isSelected: Boolean) {
             chip.isChecked = isSelected
+
+            if (isSelected) {
+                chip.paintFlags = (chip.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
+            } else {
+                chip.paintFlags = (chip.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv())
+            }
 
             chip.chipBackgroundColor = ColorStateList.valueOf(
                 ContextCompat.getColor(chip.context, if (isSelected) R.color.selected_tag else R.color.unselected_tag)

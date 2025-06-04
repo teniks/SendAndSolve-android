@@ -9,6 +9,7 @@
     <string name="scope_task_hint">Категория</string>
     <string name="start_date_hint">Дата начала</string>
     <string name="end_date_hint">Дата окончания</string>
+    <string name="tags_task_hint">Теги</string>
     <string name="executors">Исполнители</string>
 
     <string name="error_auth_required">Требуется авторизация</string>

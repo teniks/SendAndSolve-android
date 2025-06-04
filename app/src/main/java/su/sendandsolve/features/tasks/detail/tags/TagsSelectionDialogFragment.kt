@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.detail.ui.tags
+package su.sendandsolve.features.tasks.detail.tags
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,36 +10,28 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import su.sendandsolve.R
-import su.sendandsolve.databinding.TasksFragmentTagsDialogBinding
+import su.sendandsolve.databinding.TasksFragmentTagsSelectionDialogBinding
 import su.sendandsolve.features.tasks.adapters.TagSelectionAdapter
 import su.sendandsolve.features.tasks.domain.model.Tag
 
 @AndroidEntryPoint
-class TagsSelectionFragmentDialog : DialogFragment() {
-    private var _binding: TasksFragmentTagsDialogBinding? = null
+class TagsSelectionDialogFragment : DialogFragment() {
+    private var _binding: TasksFragmentTagsSelectionDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TagsDialogViewModel by viewModels()
+    private val viewModel: TagsSelectionDialogViewModel by viewModels()
     private lateinit var adapter: TagSelectionAdapter
 
-    private var onSaveSelectedTags: ((Set<Tag>) -> Unit)? = null
-    private var onSetSelectedTags: (() -> Set<Tag>)? = null
-
-    companion object {
-        fun newInstance(selected: Set<Tag> = emptySet()) = TagsSelectionFragmentDialog().apply {
-            arguments = Bundle().apply {
-                putSerializable("SELECTED", selected.toTypedArray())
-            }
-        }
-    }
+    private var onSave: ((Set<Tag>) -> Unit)? = null
+    private var onSetSelected: (() -> Set<Tag>)? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = TasksFragmentTagsDialogBinding.inflate(layoutInflater)
+        _binding = TasksFragmentTagsSelectionDialogBinding.inflate(layoutInflater)
         adapter = TagSelectionAdapter { tag: Tag ->
-            viewModel.toggleTagSelection(tag)
+            viewModel.toggleItemSelection(tag)
         }
-        val selectedTags = onSetSelectedTags?.invoke() ?: emptySet()
-        viewModel.setSelectedTags(selectedTags)
+        val selectedTags = onSetSelected?.invoke() ?: emptySet()
+        viewModel.setSelectedItems(selectedTags)
 
 
         setupRecyclerView()
@@ -49,7 +41,7 @@ class TagsSelectionFragmentDialog : DialogFragment() {
             builder.setTitle(R.string.select_tags)
                 .setView(binding.root)
                 .setPositiveButton(R.string.save) { _, _ ->
-                    onSaveSelectedTags?.invoke(viewModel.uiState.value.selectedTags) // Возвращаем выбранные ID
+                    onSave?.invoke(viewModel.uiState.value.selectedTags) // Возвращаем выбранные ID
                     dismiss() // Закрываем диалог
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
@@ -67,7 +59,7 @@ class TagsSelectionFragmentDialog : DialogFragment() {
     private fun setupRecyclerView() {
         binding.recyclerTags.apply {
             layoutManager = LinearLayoutManager(requireContext()) // Вертикальный список
-            adapter = this@TagsSelectionFragmentDialog.adapter // Подключаем адаптер
+            adapter = this@TagsSelectionDialogFragment.adapter // Подключаем адаптер
         }
     }
 
@@ -75,6 +67,8 @@ class TagsSelectionFragmentDialog : DialogFragment() {
         lifecycleScope.launch {
             viewModel.uiState.collect { state -> // Получаем обновления состояния
                 adapter.submitList(state.tags.map { tag ->
+                    // Конвертируем список тегов в список моделей для отображения в RecyclerView
+                    // Тэг и содержится ли он в списке выбранных тегов
                     TagSelectionModel(tag, state.selectedTags.contains(tag))
                 }) // Обновляем список
             }
@@ -86,11 +80,11 @@ class TagsSelectionFragmentDialog : DialogFragment() {
         _binding = null // Предотвращаем утечки памяти
     }
 
-    fun setOnSaveSelectedTagsListener(listener: (Set<Tag>) -> Unit) {
-        onSaveSelectedTags = listener
+    fun setListenerOnSave(listener: (Set<Tag>) -> Unit) {
+        onSave = listener
     }
 
-    fun setOnSetSelectedTagsListener(listener: () -> Set<Tag>) {
-        onSetSelectedTags = listener
+    fun setListenerOnSetSelected(listener: () -> Set<Tag>) {
+        onSetSelected = listener
     }
 }
