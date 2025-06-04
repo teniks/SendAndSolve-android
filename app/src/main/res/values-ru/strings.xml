@@ -9,6 +9,7 @@
     <string name="scope_task_hint">Категория</string>
     <string name="start_date_hint">Дата начала</string>
     <string name="end_date_hint">Дата окончания</string>
+    <string name="executors">Исполнители</string>
 
     <string name="error_auth_required">Требуется авторизация</string>
     <string name="login_hint">Логин</string>
@@ -45,10 +46,13 @@
 
     <string name="save">Сохранить</string>
     <string name="cancel">Отменить</string>
+    <string name="delete">Удалить</string>
+    <string name="plus">+</string>
 
     <string name="select_tags">Выберите теги</string>
     <string name="create_tag">Создайте тег</string>
     <string name="delete_selected_tag">Удалить выбранный тег?</string>
+    <string name="select_executors">Выберите исполнителей</string>
 
     <string name="user_was_not_found">Пользователь не найден</string>
     <string name="you_want_delete_selected_tag">Вы уверены, что хотите удалить выбранный тег?</string>

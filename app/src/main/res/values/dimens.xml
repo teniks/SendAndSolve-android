@@ -2,6 +2,7 @@
 <resources>
     <dimen name="margin_standard">8dp</dimen>
     <dimen name="margin_x2">16dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
 
     <dimen name="top_toolbar_height">74dp</dimen>
 
