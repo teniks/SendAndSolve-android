@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Send And Solve</string>
 
+    <string name="creating_task">Создание задачи</string>
     <string name="name_task_hint"> <font size="24">Название</font> </string>
     <string name="description_task_hint"> <font size="20">Описание</font> </string>
     <string name="status_task_hint">Статус</string>
@@ -9,8 +10,14 @@
     <string name="scope_task_hint">Категория</string>
     <string name="start_date_hint">Дата начала</string>
     <string name="end_date_hint">Дата окончания</string>
+    <string name="start_time_hint">Время начала</string>
+    <string name="end_time_hint">Время окончания</string>
+    <string name="from_datetime">С</string>
+    <string name="to_datetime">По</string>
     <string name="tags_task_hint">Теги</string>
+    <string name="child_tasks_hint">Дочерние задачи</string>
     <string name="executors">Исполнители</string>
+    <string name="task_was_saved">Задача сохранена</string>
 
     <string name="error_auth_required">Требуется авторизация</string>
     <string name="login_hint">Логин</string>
@@ -33,6 +40,9 @@
     <string name="already_have_an_account">Уже есть аккаунт?</string>
     <string name="log_in">Войти</string>
 
+    <string name="start_date_cannot_be_later_end">Дата начала не может быть позже конца</string>
+    <string name="end_date_cannot_be_earlier_start">Дата окончания не может быть раньше начала</string>
+    <string name="end_date_cannot_be_equal_start">Дата и время конца не может совпадать с датой начала</string>
 
     <string name="status_NEW">Новая</string>
     <string name="status_IN_PROGRESS">В работе</string>
@@ -53,9 +63,13 @@
     <string name="select_tags">Выберите теги</string>
     <string name="create_tag">Создайте тег</string>
     <string name="delete_selected_tag">Удалить выбранный тег?</string>
+    <string name="select_tasks">Выберите задачи</string>
     <string name="select_executors">Выберите исполнителей</string>
+    <string name="select_date">Выберите дату</string>
+    <string name="select_time">Выберите время</string>
 
     <string name="user_was_not_found">Пользователь не найден</string>
     <string name="you_want_delete_selected_tag">Вы уверены, что хотите удалить выбранный тег?</string>
     <string name="tag_search">Поиск тегов</string>
+    <string name="task_search">Поиск задач</string>
 </resources>

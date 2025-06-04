@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import su.sendandsolve.core.utils.CurrentUser
 import su.sendandsolve.features.tasks.domain.DomainState
 import su.sendandsolve.features.tasks.domain.Repository
 import su.sendandsolve.features.tasks.domain.model.Group
@@ -18,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GroupListViewModel @Inject constructor(
-    private val repository: Repository<Group>,
-    private val currentUser: CurrentUser
+    private val repository: Repository<Group>
 ) : ViewModel() {
     private val _groups: MutableStateFlow<List<Group>> = MutableStateFlow(emptyList())
     val groups: StateFlow<List<Group>> = _groups

@@ -11,12 +11,16 @@ import su.sendandsolve.features.tasks.domain.model.Task
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private val items = mutableListOf<Task>()
+    private var onClick: ((Task) -> Unit)? = null
+    private var onLongClick: ((Task) -> Boolean)? = null
 
     class ViewHolder(private val binding: TasksItemTaskBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: Task){
+        fun bind(task: Task, onTaskClick: ((Task) -> Unit)?, onTaskLongClick: ((Task) -> Boolean)?){
             binding.taskName.text = task.title
             binding.taskDescription.text = task.description
             binding.taskDeadline.text = DeadlineUtil.getString(task.startDate, task.endDate)
+            binding.root.setOnClickListener { onTaskClick?.invoke(task) }
+            binding.root.setOnLongClickListener { onTaskLongClick?.invoke(task) == true }
         }
     }
 
@@ -30,7 +34,7 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(items[position])
+        holder.bind(items[position], onClick, onLongClick)
 
     override fun getItemCount(): Int =
         items.size
@@ -58,5 +62,13 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
         items.clear()
         items.addAll(newList)
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun setListenerOnClick(listener: (Task) -> Unit) {
+        onClick = listener
+    }
+
+    fun setListenerOnLongClick(listener: (Task) -> Boolean) {
+        onLongClick = listener
     }
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:name=".CoreApp"
         android:allowBackup="true"
@@ -18,7 +20,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.SplashScreen">
+            android:theme="@style/Base.Theme.SendAndSolve">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,5 +28,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

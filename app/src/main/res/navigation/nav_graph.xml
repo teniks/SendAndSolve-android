@@ -10,9 +10,17 @@
         android:name="su.sendandsolve.core.items.MainFragment">
 
         <action
+            android:id="@+id/action_main_to_detail"
+            app:destination="@id/detail_fragment"/>
+
+        <action
             android:id="@+id/action_main_to_registration"
             app:destination="@id/registration_fragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="su.sendandsolve.features.tasks.detail.DetailTaskFragment"/>
 
     <fragment
         android:id="@+id/registration_fragment"

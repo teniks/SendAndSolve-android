@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import su.sendandsolve.R
 import su.sendandsolve.databinding.CoreFragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -20,6 +22,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setupButton() {
-
+        binding.actionBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_main_to_detail)
+        }
     }
 }

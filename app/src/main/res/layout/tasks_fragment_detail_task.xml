@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.tasks.detail.DetailTaskFragment"
+    android:background="@color/primary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/bar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:title="@string/creating_task"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/top_app_bar_save"
+            app:navigationIcon="@drawable/arrow_back_24dp"
+            android:background="@color/additional_1"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_standard">
+
+            <EditText
+                android:id="@+id/et_task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_task_hint"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_size_title"
+                android:textColor="@color/white"
+                android:inputType="text"
+                android:focusable="true"
+                android:layout_marginTop="@dimen/top_toolbar_height"/>
+
+            <EditText
+                android:id="@+id/et_task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description_task_hint"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="text"
+                android:layout_marginTop="@dimen/margin_x2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from_datetime"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main"
+                android:layout_marginTop="@dimen/margin_x2"
+                android:layout_marginStart="@dimen/margin_standard"/>
+
+            <LinearLayout
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_start_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/start_date_hint"
+                    android:textColorHint="@color/white"
+                    app:endIconMode="clear_text"
+                    app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                    app:endIconTint="@color/white"
+                    android:layout_marginEnd="@dimen/margin_standard">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/start_time_hint"
+                    android:textColorHint="@color/white"
+                    app:endIconMode="clear_text"
+                    app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                    app:endIconTint="@color/white"
+                    android:layout_marginStart="@dimen/margin_standard">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_start_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to_datetime"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main"
+                android:layout_marginTop="@dimen/margin_x2"
+                android:layout_marginStart="@dimen/margin_standard"/>
+
+            <LinearLayout
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/end_date_hint"
+                    android:textColorHint="@color/white"
+                    app:endIconMode="clear_text"
+                    app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                    app:endIconTint="@color/white"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_end_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/start_time_hint"
+                    android:textColorHint="@color/white"
+                    app:endIconMode="clear_text"
+                    app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                    app:endIconTint="@color/white"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginStart="@dimen/margin_standard">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_end_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tags_task_hint"
+                android:textSize="@dimen/text_size_main"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/margin_x2"
+                android:layout_marginStart="@dimen/margin_standard"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_btn_tag_add"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
+                    android:backgroundTint="@color/accent_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_main"
+                    android:text="@string/plus"
+                    android:layout_marginTop="@dimen/margin_standard"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_selected_tags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/tasks_item_chip"
+                    android:layout_marginTop="@dimen/margin_standard"/>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/status_task_hint"
+                android:textColorHint="@color/white"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="@dimen/margin_standard">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/dropdown_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/priority_task_hint"
+                android:textColorHint="@color/white"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="@dimen/margin_standard">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/dropdown_priority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/child_tasks_hint"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_main"
+                android:layout_marginTop="@dimen/margin_x2"
+                android:layout_marginStart="@dimen/margin_standard"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:minHeight="130dp"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btn_task_add"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/plus"
+                    style="@style/outlined_button"
+                    android:backgroundTint="@color/accent_1"
+                    android:layout_marginTop="@dimen/margin_x2"
+                    android:layout_marginBottom="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_selected_tasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/tasks_item_task"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_standard"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/executors"
+                android:textSize="@dimen/text_size_main"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/margin_x2"
+                android:layout_marginStart="@dimen/margin_standard"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="100dp"
+                android:layout_marginBottom="@dimen/top_toolbar_height">
+
+                <Button
+                    android:id="@+id/btn_user_add"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/plus"
+                    style="@style/outlined_button"
+                    android:backgroundTint="@color/accent_1"
+                    android:layout_marginTop="@dimen/margin_x2"
+                    android:layout_marginBottom="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_standard"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_executors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/core_item_user"
+                    android:layout_marginTop="@dimen/margin_standard"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
