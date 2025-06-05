@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import su.sendandsolve.R
 import su.sendandsolve.databinding.TasksFragmentTagsSelectionDialogBinding
-import su.sendandsolve.features.tasks.adapters.TagSelectionAdapter
 import su.sendandsolve.features.tasks.domain.model.Tag
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.adapters
+package su.sendandsolve.features.tasks.detail.tags
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

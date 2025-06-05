@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import su.sendandsolve.R
-import su.sendandsolve.features.tasks.adapters.GroupAdapter
 
 @AndroidEntryPoint
 class GroupListFragment : Fragment() {

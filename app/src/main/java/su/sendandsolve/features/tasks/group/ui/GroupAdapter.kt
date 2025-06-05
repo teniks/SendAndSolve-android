@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.adapters
+package su.sendandsolve.features.tasks.group.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import su.sendandsolve.databinding.TasksItemTaskGroupBinding
+import su.sendandsolve.features.tasks.adapters.TaskAdapter
 import su.sendandsolve.features.tasks.domain.model.Group
 
 class GroupAdapter : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {

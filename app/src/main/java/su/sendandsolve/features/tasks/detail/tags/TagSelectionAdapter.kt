@@ -1,4 +1,4 @@
-package su.sendandsolve.features.tasks.adapters
+package su.sendandsolve.features.tasks.detail.tags
 
 import android.content.res.ColorStateList
 import android.graphics.Paint
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import su.sendandsolve.R
-import su.sendandsolve.features.tasks.detail.tags.TagSelectionModel
 import su.sendandsolve.features.tasks.domain.model.Tag
 
 class TagSelectionAdapter(
@@ -55,13 +54,13 @@ class TagSelectionAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagSelectionAdapter.TagChipViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagChipViewHolder {
         return TagChipViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.tasks_item_chip, parent, false))
     }
 
-    override fun onBindViewHolder(holder: TagSelectionAdapter.TagChipViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TagChipViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

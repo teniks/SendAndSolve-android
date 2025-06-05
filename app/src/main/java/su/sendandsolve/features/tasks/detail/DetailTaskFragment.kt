@@ -21,12 +21,12 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import su.sendandsolve.R
+import su.sendandsolve.core.items.dropdown.DropdownAdapter
 import su.sendandsolve.core.items.users.UserAdapter
 import su.sendandsolve.core.items.users.UserSelectionDialogFragment
 import su.sendandsolve.databinding.TasksFragmentDetailTaskBinding
-import su.sendandsolve.features.tasks.adapters.DropdownAdapter
-import su.sendandsolve.features.tasks.adapters.TagAdapter
 import su.sendandsolve.features.tasks.adapters.TaskAdapter
+import su.sendandsolve.features.tasks.detail.tags.TagAdapter
 import su.sendandsolve.features.tasks.detail.tags.TagsSelectionDialogFragment
 import su.sendandsolve.features.tasks.detail.tasks.TasksSelectionDialogFragment
 import su.sendandsolve.features.tasks.domain.DomainState
