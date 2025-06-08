@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                             .setMessage(state.message)
                             .setPositiveButton(getString(R.string.error_positive_button)) { _, _ -> restart(context) }
                             .setNegativeButton(getString(R.string.error_negative_button)) { _, _ ->  viewModel.logout() }
+                            .setCancelable(false)
                             .show()
                     }
                     is AuthCheckViewModel.AuthState.Loading -> {}
