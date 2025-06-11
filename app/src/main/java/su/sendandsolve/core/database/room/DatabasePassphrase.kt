@@ -5,8 +5,10 @@ import android.os.Build
 import android.os.FileObserver
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
+import android.util.Log
 import su.sendandsolve.core.utils.SecurityFileObserver
 import java.io.File
+import java.security.InvalidKeyException
 import java.security.KeyStore
 import java.security.SecureRandom
 import java.util.Arrays
@@ -101,8 +103,14 @@ class DatabasePassphrase(private val context: Context) {
     }
 
     private fun retrieveKey(): SecretKey {
-        val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
-        return keyStore.getKey(keyStoreAlias, null) as SecretKey
+        try {
+            val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+            return keyStore.getKey(keyStoreAlias, null) as SecretKey
+        } catch (ex: InvalidKeyException) {
+            Log.e("DatabasePassphrase", "Error of retrieve key. The key will be cleaned.  \n${ex.message}")
+            cleanPassphrase()
+            return generateKey()
+        }
     }
 
     private fun encryptPassphrase(file: File, key: SecretKey, passphrase: ByteArray) {
