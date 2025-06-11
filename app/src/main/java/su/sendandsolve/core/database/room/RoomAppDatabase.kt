@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import net.sqlcipher.database.SupportFactory
 import su.sendandsolve.core.database.room.dao.DeviceDao
 import su.sendandsolve.core.database.room.dao.GroupDao
 import su.sendandsolve.core.database.room.dao.NoteDao
@@ -74,13 +75,16 @@ abstract class RoomAppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: RoomAppDatabase? = null
 
-        fun getAppDataBase(context: Context): RoomAppDatabase {
+        fun getAppDataBase(context: Context, path: String, supportFactory: SupportFactory): RoomAppDatabase {
             return INSTANCE ?: synchronized(this) {
+
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     RoomAppDatabase::class.java,
-                    "core.db"
-                ).build()
+                    path
+                )
+                    .openHelperFactory(supportFactory)
+                    .build()
 
                 INSTANCE = instance
                 instance

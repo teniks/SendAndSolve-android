@@ -78,5 +78,6 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     implementation(libs.androidx.security.crypto)
+    implementation(libs.android.database.sqlcipher)
     implementation(libs.androidx.core.splashscreen)
 }

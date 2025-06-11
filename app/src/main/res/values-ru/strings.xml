@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">Send And Solve</string>
 
+    <string name="trying_to_open_the_file">Попытка открытия файла</string>
+    <string name="unauthorized_file_access">Несанкционированный доступ к файлу</string>
+    <string name="modification_of_the_file">Модификация файла</string>
+    <string name="deleting_the_file">Удаление файла</string>
+    <string name="critical_event">КРИТИЧЕСКОЕ СОБЫТИЕ</string>
+
     <string name="creating_task">Создание задачи</string>
     <string name="name_task_hint"> <font size="24">Название</font> </string>
     <string name="description_task_hint"> <font size="20">Описание</font> </string>

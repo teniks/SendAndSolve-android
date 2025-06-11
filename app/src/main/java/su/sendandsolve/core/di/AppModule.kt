@@ -7,6 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SupportFactory
+import su.sendandsolve.core.database.room.DatabasePassphrase
 import su.sendandsolve.core.database.room.RoomAppDatabase
 import su.sendandsolve.core.utils.CurrentUser
 import su.sendandsolve.core.utils.SessionManager
@@ -24,9 +26,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context) : RoomAppDatabase {
-        //return RoomAppDatabase.getAppDataBase(context)
+    fun provideDatabase(@ApplicationContext context: Context, supportFactory: SupportFactory) : RoomAppDatabase {
+//        return RoomAppDatabase.getAppDataBase(context, "sendandsolve.db", supportFactory)
         return Room.inMemoryDatabaseBuilder(context, RoomAppDatabase::class.java)
+            .openHelperFactory(supportFactory)
             .allowMainThreadQueries()
             .build()
     }
@@ -35,5 +38,17 @@ object AppModule {
     @Singleton
     fun provideSessionManager(@ApplicationContext context: Context) : SessionManager {
         return SessionManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabasePassphrase(@ApplicationContext context: Context) : DatabasePassphrase {
+        return DatabasePassphrase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSupportFactory(databasePassphrase: DatabasePassphrase) : SupportFactory {
+        return SupportFactory(databasePassphrase.getPassphrase())
     }
 }

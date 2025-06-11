@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Send And Solve</string>
 
+    <string name="trying_to_open_the_file">Trying to open the file</string>
+    <string name="unauthorized_file_access">Unauthorized file access</string>
+    <string name="modification_of_the_file">Modification of the file</string>
+    <string name="deleting_the_file">Removing the file</string>
+    <string name="critical_event">CRITICAL EVENT</string>
+
     <string name="creating_task">Creating task</string>
     <string name="name_task_hint"> <font size="24">Title</font> </string>
     <string name="description_task_hint"> <font size="20">Description</font> </string>
